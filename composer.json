@@ -1,12 +1,12 @@
 {
-    "name": "paparee/bale-dindik",
+    "name": "bale/bale-dindik",
     "description": "Bale View of Dindik Company Profile",
     "keywords": [
         "Papa Ree",
         "laravel",
         "bale-dindik"
     ],
-    "homepage": "https://github.com/paparee/bale-dindik",
+    "homepage": "https://github.com/bale/bale-dindik",
     "license": "MIT",
     "authors": [
         {
