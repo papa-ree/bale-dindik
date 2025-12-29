@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html class="dark">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -11,23 +11,32 @@
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{--
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"> --}}
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;1,500&family=Noto+Color+Emoji&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,500;1,500&family=Quicksand&display=swap"
         rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 
 </head>
 
 {{-- Layout For Livewire Admin Panel --}}
 
 <body
-    class="min-h-screen bg-gray-100 dark:bg-slate-900 scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100/50 overscroll-none">
+    class="min-h-screen bg-gray-100 scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
 
-    {{-- <livewire:bale-praban.shared-components.praban-topbar /> --}}
+    <livewire:bale-dindik.shared-components.topbar />
 
     <main>
         {{ $slot }}
     </main>
+
+    <livewire:bale-dindik.landing-page.footer.index />
+    @livewireScripts
 
 </body>
 
