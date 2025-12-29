@@ -4,8 +4,8 @@ namespace Paparee\BaleDindik\Livewire\LandingPage\Footer;
 
 use Livewire\Component;
 use Livewire\Attributes\{Computed, Layout};
-use Paparee\BaleEmperan\Models\Section;
-use Paparee\BaleEmperan\Models\HeroSection;
+use Bale\Emperan\Models\Section;
+use Bale\Emperan\Models\HeroSection;
 
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component

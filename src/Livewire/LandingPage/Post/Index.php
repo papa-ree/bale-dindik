@@ -4,8 +4,8 @@ namespace Paparee\BaleDindik\Livewire\LandingPage\Post;
 
 use Livewire\Component;
 use Livewire\Attributes\{Computed, Layout};
-use Paparee\BaleEmperan\Models\Post;
-use Paparee\BaleEmperan\Models\Section;
+use Bale\Emperan\Models\Post;
+use Bale\Emperan\Models\Section;
 
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component

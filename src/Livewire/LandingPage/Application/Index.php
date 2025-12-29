@@ -5,7 +5,7 @@ namespace Paparee\BaleDindik\Livewire\LandingPage\Application;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Component;
 use Livewire\Attributes\{Computed, Layout};
-use Paparee\BaleEmperan\Models\Section;
+use Bale\Emperan\Models\Section;
 
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component

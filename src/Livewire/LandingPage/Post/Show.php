@@ -4,7 +4,7 @@ namespace Paparee\BaleDindik\Livewire\LandingPage\Post;
 
 use Livewire\Component;
 use Livewire\Attributes\{Layout};
-use Paparee\BaleEmperan\Models\Post;
+use Bale\Emperan\Models\Post;
 
 #[Layout('bale-dindik::layouts.app')]
 class Show extends Component

@@ -4,7 +4,7 @@ namespace Paparee\BaleDindik\Livewire\LandingPage\Post\Section;
 
 use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Paparee\BaleEmperan\Models\Post;
+use Bale\Emperan\Models\Post;
 
 class SuggestedPosts extends Component
 {

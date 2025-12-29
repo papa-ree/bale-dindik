@@ -7,7 +7,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Paparee\BaleEmperan\Models\Section;
+use Bale\Emperan\Models\Section;
 
 #[Layout('bale-dindik::layouts.app')]
 class EventList extends Component

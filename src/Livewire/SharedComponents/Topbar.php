@@ -4,7 +4,7 @@ namespace Paparee\BaleDindik\Livewire\SharedComponents;
 
 use Livewire\Component;
 use Livewire\Attributes\{Computed, Layout};
-use Paparee\BaleEmperan\Models\Navigation;
+use Bale\Emperan\Models\Navigation;
 
 #[Layout('bale-dindik::layouts.app')]
 class Topbar extends Component
