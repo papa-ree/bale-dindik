@@ -17,7 +17,7 @@
             <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center gap-8">
                 @if (request()->routeIs('index'))
-                    <a href="#" @click.prevent="scrollToTop"
+                    <a href="#"
                         class="text-gray-700 hover:text-primary font-medium transition-colors duration-300 relative group">
                         Home
                         <span
@@ -107,7 +107,7 @@
     <div x-show="mobileMenuOpen" x-cloak x-transition class="lg:hidden bg-white border-t border-gray-200 shadow-lg">
         <nav class="container mx-auto px-4 py-2 flex flex-col gap-1">
             @if (request()->routeIs('index'))
-                <a href="#" @click.prevent="scrollToTop(); mobileMenuOpen = false"
+                <a href="#" @click.prevent="mobileMenuOpen = false"
                     class="text-gray-700 hover:text-primary font-medium transition-colors duration-300 py-2">Home</a>
             @else
                 <a href="{{ route('index') }}" wire:navigate @click="mobileMenuOpen = false"
