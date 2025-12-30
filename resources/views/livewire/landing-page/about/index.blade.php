@@ -14,8 +14,10 @@
                 <div class="bg-white rounded-lg p-8 md:p-12 border border-gray-200 shadow-lg" data-aos="fade-up">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
                         <div class="shrink-0">
-                            <img src="{{ route('media.show', $meta['foto pimpinan']['path']) }}"
-                                alt="Dr. Suhartono, M.Pd." class="w-48 h-48 rounded-lg object-cover shadow-md" />
+                            @if(!empty($meta['foto pimpinan']['path']))
+                                <img src="{{ route('media.show', $meta['foto pimpinan']['path']) }}"
+                                    alt="Dr. Suhartono, M.Pd." class="w-48 h-48 rounded-lg object-cover shadow-md" />
+                            @endif
                         </div>
                         <div class="flex-1 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-primary mb-2">
@@ -39,15 +41,15 @@
                         <div class="bg-white rounded-lg p-8 text-center border border-gray-200 hover:shadow-lg transition-all duration-300"
                             data-aos="fade-up" data-aos-delay="{{ $loopIndex * 100 }}">
                             <div class="text-4xl md:text-5xl font-bold text-primary mb-2 odometer" x-data="{
-                                        endVal: {{ $item['count'] ?? 0 }},
-                                        initOdometer() {
-                                            // Odometer automatically watches for class 'odometer' and value changes
-                                            // We just need to set the value after a short delay to trigger animation
-                                            setTimeout(() => {
-                                                this.$el.innerHTML = this.endVal;
-                                            }, 100);
-                                        }
-                                    }" x-init="initOdometer()">
+                                                endVal: {{ $item['count'] ?? 0 }},
+                                                initOdometer() {
+                                                    // Odometer automatically watches for class 'odometer' and value changes
+                                                    // We just need to set the value after a short delay to trigger animation
+                                                    setTimeout(() => {
+                                                        this.$el.innerHTML = this.endVal;
+                                                    }, 100);
+                                                }
+                                            }" x-init="initOdometer()">
                                 0
                             </div>
                             <div class="text-gray-600 font-medium">{{$item['name'] ?? 'kosong'}}</div>

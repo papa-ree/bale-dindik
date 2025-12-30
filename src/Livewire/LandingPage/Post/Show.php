@@ -20,10 +20,6 @@ class Show extends Component
         if (!$this->post) {
             abort(404, 'Berita tidak ditemukan');
         }
-
-        if (method_exists($this->post, 'visit')) {
-            $this->post->visit();
-        }
     }
 
     public function render()

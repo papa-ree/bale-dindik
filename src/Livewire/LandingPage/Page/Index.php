@@ -19,11 +19,6 @@ class Index extends Component
         if (!$this->page) {
             abort(404, 'Halaman tidak ditemukan');
         }
-
-        // Track visitor (opsional)
-        if (method_exists($this->page, 'visit')) {
-            $this->page->visit();
-        }
     }
 
     public function render()

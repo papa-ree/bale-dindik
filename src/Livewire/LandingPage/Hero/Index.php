@@ -15,8 +15,6 @@ class Index extends Component
     {
         $section = Section::whereSlug('hero-section')->first();
 
-        $section->visit();
-
         $this->hero = $section?->content ?? [];
     }
 
