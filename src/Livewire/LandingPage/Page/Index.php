@@ -9,7 +9,7 @@ use Bale\Emperan\Models\Page;
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component
 {
-    public string $slug = '';
+    public $page;
 
     public function mount(string $page)
     {
@@ -22,7 +22,7 @@ class Index extends Component
 
         // Track visitor (opsional)
         if (method_exists($this->page, 'visit')) {
-            $this->page->visit()->increment();
+            $this->page->visit();
         }
     }
 

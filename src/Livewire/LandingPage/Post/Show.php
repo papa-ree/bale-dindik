@@ -22,7 +22,7 @@ class Show extends Component
         }
 
         if (method_exists($this->post, 'visit')) {
-            $this->post->visit()->increment();
+            $this->post->visit();
         }
     }
 
