@@ -22,6 +22,7 @@
     @livewireStyles
 
     <!-- Google tag (gtag.js) -->
+    {{--
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9JWC4EMHQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -29,7 +30,7 @@
         gtag( 'js', new Date() );
 
         gtag( 'config', 'G-H9JWC4EMHQ' );
-    </script>
+    </script> --}}
 
 </head>
 
