@@ -23,24 +23,3 @@
         <livewire:bale-dindik.landing-page.about.index />
     </div>
 </div>
-
-@assets
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-@endassets
-
-@script
-<script>
-    // Initialize AOS immediately when script loads
-    AOS.init( {
-        duration: 800,
-        once: false, // Allow re-animation on navigate
-    } );
-
-    // Reinitialize AOS after Livewire navigation
-    document.addEventListener( 'livewire:navigated', () =>
-    {
-        AOS.refresh();
-    } );
-</script>
-@endscript
