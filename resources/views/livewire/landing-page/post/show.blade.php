@@ -14,7 +14,7 @@
                         {{-- Featured Image --}}
                         @if ($post->thumbnail)
                             <div class="mb-10 rounded-2xl overflow-hidden shadow-2xl">
-                                <img src="{{ route('media.show', 'dindik-profile/thumbnails/' . $post->thumbnail) }}"
+                                <img src="{{ route('media.show', organization()->slug . '/thumbnails/' . $post->thumbnail) }}"
                                     alt="{{ $post->title }}" class="w-full h-auto object-cover max-h-[500px]" />
                             </div>
                         @endif
