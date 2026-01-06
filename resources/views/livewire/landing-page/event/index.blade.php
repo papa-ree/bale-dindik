@@ -3,7 +3,7 @@
         events: @js($this->availableEvents),
     })" x-cloak>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                     Events & Announcements
                 </h2>
@@ -14,8 +14,8 @@
 
             <div class="max-w-4xl mx-auto space-y-6">
                 <template x-for="event in eventsData">
-                    <div class="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-300 group"
-                        :data-aos="'fade-up'">
+                    <div
+                        class="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-300 group">
                         <div class="flex gap-6">
                             <div class="shrink-0">
                                 <div
@@ -43,7 +43,7 @@
                 </template>
             </div>
 
-            <div class="text-center mt-10" data-aos="fade-up">
+            <div class="text-center mt-10">
                 <a href="{{ $section['meta']['url'] ?? '#' }}" wire:navigat.hover
                     class="text-primary dark:text-white font-semibold hover:text-secondary transition-colors duration-300 inline-flex items-center gap-2 text-lg">
                     {{ $section['meta']['url_text'] ?? 'View All Events' }}

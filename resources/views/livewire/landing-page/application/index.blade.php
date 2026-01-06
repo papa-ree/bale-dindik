@@ -4,7 +4,7 @@
         categories: @js($this->availableCategories)
     })" x-cloak>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                     {{$section['meta']['title'] ?? 'kosong'}}
                 </h2>
@@ -15,7 +15,7 @@
             </div>
 
             <!-- Search and Filter -->
-            <div class="max-w-4xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+            <div class="max-w-4xl mx-auto mb-10">
                 <div class="relative mb-6">
                     <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -50,8 +50,7 @@
 
                 <!-- Jika tidak ada aplikasi -->
                 <div x-show="filteredApplications.length === 0"
-                    class="bg-white dark:bg-slate-800 col-span-3 rounded-lg p-8 border border-gray-200 dark:border-slate-700 text-center shadow-sm"
-                    data-aos="fade-up">
+                    class="bg-white dark:bg-slate-800 col-span-3 rounded-lg p-8 border border-gray-200 dark:border-slate-700 text-center shadow-sm">
                     <div class="flex flex-col items-center mx-auto w-full gap-4">
 
                         <!-- Icon (search slash / not found) -->
@@ -80,8 +79,7 @@
                 <template x-if="filteredApplications.length > 0">
                     <template x-for="app in filteredApplications">
                         <a :href="app.url" target="_blank"
-                            class="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                            data-aos="fade-up">
+                            class="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                             <div class="flex items-start gap-4">
                                 <div
                                     class="p-3 bg-primary/5 rounded-lg group-hover:bg-primary transition-all duration-300">

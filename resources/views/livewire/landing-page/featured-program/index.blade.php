@@ -2,7 +2,7 @@
     <section id="programs" class="py-20 bg-white dark:bg-slate-900">
         {{-- @dump($section) --}}
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                     @if(!empty($section['meta']['title']))
                         {{ $section['meta']['title'] }}
@@ -17,8 +17,7 @@
                 @if(!empty($section['items']))
                     @foreach ($section['items'] as $item)
                         <a href="{{ $item['url'] }}"
-                            class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                            :data-aos="'fade-up'">
+                            class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                             <div class="relative overflow-hidden h-64">
                                 <img src="{{$item['image']}}" alt="{{$item['name']}}"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />

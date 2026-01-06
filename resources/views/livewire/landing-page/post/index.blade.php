@@ -6,7 +6,7 @@
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
                 {{-- Section Header --}}
-                <div class="text-center mb-12" data-aos="fade-up">
+                <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                         {{ $section['title'] }}
                     </h2>
@@ -74,7 +74,7 @@
                 {{-- Button --}}
                 @foreach ($section['buttons'] as $index => $button)
                     @if ($button['show'])
-                        <div class="text-center" data-aos="fade-up">
+                        <div class="text-center">
                             <a href="{{ $button['url'] ?? '#' }}"
                                 class="border-2 border-primary dark:border-white text-primary dark:text-white hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2">
                                 {{ $button['label'] ?? 'See All' }}

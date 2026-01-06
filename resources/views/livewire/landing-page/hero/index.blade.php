@@ -1,4 +1,4 @@
-<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden" data-aos="fade-up">
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
 
     <!-- Background -->
     <div class="absolute inset-0 z-0">
@@ -18,7 +18,7 @@
 
     <!-- Content -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-4xl" data-aos="fade-up">
+        <div class="max-w-4xl">
 
             {{-- APP/ORG NAME BADGE --}}
             @if(!empty($hero['organization'] ?? false))

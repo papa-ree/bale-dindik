@@ -3,7 +3,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Leadership -->
             <div class="max-w-5xl mx-auto mb-20">
-                <div class="text-center mb-12" data-aos="fade-up">
+                <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                         @if(!empty($meta['title']))
                             {{$meta['title']}}
@@ -11,8 +11,7 @@
                     </h2>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-lg p-8 md:p-12 border border-gray-200 dark:border-slate-700 shadow-lg"
-                    data-aos="fade-up">
+                <div class="bg-white dark:bg-slate-800 rounded-lg p-8 md:p-12 border border-gray-200 dark:border-slate-700 shadow-lg">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
                         <div class="shrink-0">
                             @if(!empty($meta['foto pimpinan']['path']))
@@ -39,8 +38,7 @@
             <div class="max-w-6xl mx-auto mb-20">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach ($items as $loopIndex => $item)
-                        <div class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
-                            data-aos="fade-up" data-aos-delay="{{ $loopIndex * 100 }}">
+                        <div class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                             <div class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-2 odometer" x-data="{
                                                     endVal: {{ $item['count'] ?? 0 }},
                                                     initOdometer() {
