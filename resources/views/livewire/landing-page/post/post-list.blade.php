@@ -14,7 +14,7 @@
                         <a href="{{ route('bale.view-post', $post->slug) }}" class="block">
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
-                                    <img src="{{ route('media.show', organization()->slug . '/thumbnails/' . $post->thumbnail) }}" alt=""
+                                    <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $post->thumbnail) }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else
                                     <div

@@ -10,7 +10,7 @@
                 class="group flex gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-gray-100 dark:border-slate-700 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-md">
                 <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden">
                     @if ($suggested->thumbnail)
-                        <img src="{{ route('media.show', organization()->slug . '/thumbnails/' . $suggested->thumbnail) }}" alt=""
+                        <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $suggested->thumbnail) }}" alt=""
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     @else
                         <div class="w-full h-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">

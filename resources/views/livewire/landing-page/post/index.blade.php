@@ -26,7 +26,7 @@
                             class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group block">
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
-                                    <img src="{{ route('media.show', organization()->slug . '/thumbnails/' . $post->thumbnail) }}" alt=""
+                                    <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $post->thumbnail) }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else
                                     <div class="w-full h-full group-hover:scale-150 transition-transform duration-500 bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
