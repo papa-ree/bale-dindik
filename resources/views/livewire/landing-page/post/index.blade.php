@@ -22,7 +22,7 @@
                 <div
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ $section['layouts']['grid'] }} gap-8 max-w-7xl mx-auto mb-10">
                     @foreach ($this->availablePosts as $post)
-                        <a href="{{ route('bale.view-post', $post->slug) }}" wire:key='{{ $post->slug }}'
+                        <a href="{{ route('bale.view-post', $post->slug) }}" wire:key='{{ $post->slug }}' wire:navigate.hover
                             class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group block">
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
@@ -75,7 +75,7 @@
                 @foreach ($section['buttons'] as $index => $button)
                     @if ($button['show'])
                         <div class="text-center">
-                            <a href="{{ $button['url'] ?? '#' }}"
+                            <a href="{{ $button['url'] ?? '#' }}" wire:navigate.hover
                                 class="border-2 border-primary dark:border-white text-primary dark:text-white hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2">
                                 {{ $button['label'] ?? 'See All' }}
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -24,7 +24,7 @@
 
                 {{-- Share or Back Button --}}
                 <div class="mt-12 flex items-center justify-between">
-                    <a href="{{ route('index') }}"
+                    <a href="{{ route('index') }}" wire:navigate.hover
                         class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

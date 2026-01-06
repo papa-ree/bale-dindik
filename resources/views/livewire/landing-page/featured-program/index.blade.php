@@ -16,7 +16,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 @if(!empty($section['items']))
                     @foreach ($section['items'] as $item)
-                        <a href="{{ $item['url'] }}"
+                        <a href="{{ $item['url'] }}" wire:navigate.hover
                             class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                             <div class="relative overflow-hidden h-64">
                                 <img src="{{$item['image']}}" alt="{{$item['name']}}"
