@@ -5,7 +5,7 @@
 
             {{-- ABOUT (FROM HERO SECTION) --}}
             <div>
-                <h3 class="font-bold text-lg mb-6">{{ $this->about->name }}</h3>
+                <h3 class="font-bold text-lg mb-6">{{ $this->about->content['organization'] }}</h3>
 
                 <ul class="space-y-2">
                     @if(($this->about->content['show_title'] ?? false) && !empty($this->about->content['title']))
