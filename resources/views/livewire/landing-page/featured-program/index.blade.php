@@ -1,14 +1,14 @@
 <div>
-    <section id="programs" class="py-20 bg-white">
+    <section id="programs" class="py-20 bg-white dark:bg-slate-900">
         {{-- @dump($section) --}}
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4">
+                <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                     @if(!empty($section['meta']['title']))
                         {{ $section['meta']['title'] }}
                     @endif
                 </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                <p class="text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
                     Innovative initiatives driving educational excellence in Ponorogo
                 </p>
             </div>
@@ -17,7 +17,7 @@
                 @if(!empty($section['items']))
                     @foreach ($section['items'] as $item)
                         <a href="{{ $item['url'] }}"
-                            class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                            class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
                             :data-aos="'fade-up'">
                             <div class="relative overflow-hidden h-64">
                                 <img src="{{$item['image']}}" alt="{{$item['name']}}"

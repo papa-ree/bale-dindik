@@ -6,8 +6,8 @@
         @if(!empty($hero['backgrounds']))
             @foreach($hero['backgrounds'] as $bg)
                 @if($bg['type'] === 'image')
-                    <img src="{{ route('media.show', organization_slug().'/landing-page/' . $bg['path']) }}" alt="{{ $bg['alt'] ?? '' }}"
-                        class="w-full h-full object-cover absolute inset-0" />
+                    <img src="{{ route('media.show', organization_slug() . '/landing-page/' . $bg['path']) }}"
+                        alt="{{ $bg['alt'] ?? '' }}" class="w-full h-full object-cover absolute inset-0" />
                 @endif
             @endforeach
         @endif
@@ -82,6 +82,8 @@
     </div>
 
     <!-- Bottom Gradient -->
-    <div class="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-neutral to-transparent z-10"></div>
+    <div
+        class="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-neutral dark:from-slate-900 to-transparent z-10">
+    </div>
 
 </section>

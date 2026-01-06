@@ -1,18 +1,18 @@
 <div>
 
     @if ($section['is_active'])
-        <section id="news" class="py-20 bg-white">
+        <section id="news" class="py-20 bg-white dark:bg-slate-900">
 
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
                 {{-- Section Header --}}
                 <div class="text-center mb-12" data-aos="fade-up">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
                         {{ $section['title'] }}
                     </h2>
 
                     @if ($section['subtitle'])
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        <p class="text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
                             {{ $section['subtitle'] }}
                         </p>
                     @endif
@@ -23,7 +23,7 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ $section['layouts']['grid'] }} gap-8 max-w-7xl mx-auto mb-10">
                     @foreach ($this->availablePosts as $post)
                         <a href="{{ route('bale.view-post', $post->slug) }}" wire:key='{{ $post->slug }}'
-                            class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group block">
+                            class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group block">
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
                                     <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $post->thumbnail) }}" alt=""
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="p-6">
-                                <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-3">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
@@ -50,16 +50,16 @@
                                 </div>
 
                                 <h3
-                                    class="font-bold text-primary mb-3 text-lg line-clamp-2 group-hover:text-secondary transition-colors duration-300">
+                                    class="font-bold text-primary dark:text-white mb-3 text-lg line-clamp-2 group-hover:text-secondary transition-colors duration-300">
                                     {{ $post->title }}
                                 </h3>
 
-                                <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                                <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-4">
                                     {{ $post->excerpt(100) }}
                                 </p>
 
                                 <span
-                                    class="text-primary text-sm font-semibold inline-flex items-center group-hover:text-secondary transition-colors duration-300">
+                                    class="text-primary dark:text-white text-sm font-semibold inline-flex items-center group-hover:text-secondary transition-colors duration-300">
                                     Read more
                                     <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@
                     @if ($button['show'])
                         <div class="text-center" data-aos="fade-up">
                             <a href="{{ $button['url'] ?? '#' }}"
-                                class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2">
+                                class="border-2 border-primary dark:border-white text-primary dark:text-white hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2">
                                 {{ $button['label'] ?? 'See All' }}
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

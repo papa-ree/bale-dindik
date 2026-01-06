@@ -36,7 +36,7 @@
 {{-- Layout For Livewire Admin Panel --}}
 
 <body
-    class="min-h-screen bg-gray-100 scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
+    class="min-h-screen bg-gray-100 dark:bg-slate-900 scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
 
     <livewire:bale-dindik.shared-components.topbar />
 
