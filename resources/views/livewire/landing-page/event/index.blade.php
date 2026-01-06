@@ -44,7 +44,7 @@
             </div>
 
             <div class="text-center mt-10">
-                <a href="{{ $section['meta']['url'] ?? '#' }}" wire:navigate.hover
+                <a href="{{ $section['meta']['url'] ?? '#' }}" wire:navigate
                     class="text-primary dark:text-white font-semibold hover:text-secondary transition-colors duration-300 inline-flex items-center gap-2 text-lg">
                     {{ $section['meta']['url_text'] ?? 'View All Events' }}
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
