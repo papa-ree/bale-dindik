@@ -9,7 +9,9 @@
                     @endif
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    Innovative initiatives driving educational excellence in Ponorogo
+                    @if(!empty($section['meta']['subtitle']))
+                        {{ $section['meta']['subtitle'] }}
+                    @endif
                 </p>
             </div>
 
