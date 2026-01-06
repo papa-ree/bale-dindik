@@ -1,5 +1,5 @@
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm select-none"
-    data-aos="fade-down" x-data="{mobileMenuOpen: false}" @click.away="mobileMenuOpen=false">
+    x-data="{mobileMenuOpen: false}" @click.away="mobileMenuOpen=false">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
