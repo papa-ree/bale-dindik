@@ -43,7 +43,7 @@
                 {{-- Share or Back Button (Placed below both columns on all screens) --}}
                 <div
                     class="mt-16 flex items-center justify-between border-t border-gray-200 dark:border-slate-800 pt-8">
-                    <a href="{{ route('bale.post-list') }}" wire:navigate
+                    <a href="{{ route('bale.post-list') }}" wire:navigate.hover
                         class="inline-flex items-center gap-2 text-primary dark:text-white hover:text-primary/80 dark:hover:text-white/80 font-medium transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

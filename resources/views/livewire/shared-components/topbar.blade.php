@@ -25,7 +25,7 @@
                             class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
                     </a>
                 @else
-                    <a href="{{ route('index') }}" wire:navigate
+                    <a href="{{ route('index') }}" wire:navigate.hover
                         class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group">
                         Home
                         <span
@@ -62,7 +62,7 @@
                                             <a class="flex items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
                                                 @if ($navItem->url_mode) href="{{ $navItem->url }}"
                                                 target="{{ $navItem->target ?? '_self' }}" @else
-                                                    href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate
+                                                    href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover
                                                 @endif>
                                                 {{ $navItem->name }}
                                             </a>
@@ -75,7 +75,7 @@
                     @else
                         <a class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group"
                             @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" @else
-                            href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate @endif>
+                            href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover @endif>
                             {{ $nav->name }}
                             <span
                                 class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
@@ -114,7 +114,7 @@
                 <a href="#" @click.prevent="mobileMenuOpen = false"
                     class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">Home</a>
             @else
-                <a href="{{ route('index') }}" wire:navigate @click="mobileMenuOpen = false"
+                <a href="{{ route('index') }}" wire:navigate.hover @click="mobileMenuOpen = false"
                     class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">Home</a>
             @endif
 
@@ -144,7 +144,7 @@
                                     @foreach ($nav->children as $navItem)
                                         <a @if ($navItem->url_mode) href="{{ $navItem->url }}"
                                         target="{{ $navItem->target ?? '_self' }}" @else
-                                            href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate @endif
+                                            href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover @endif
                                             @click="mobileMenuOpen = false"
                                             class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">
                                             {{ $navItem->name }}
@@ -156,7 +156,7 @@
                     </div>
                 @else
                     <a @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" @else
-                    href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate @endif
+                    href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover @endif
                         @click="mobileMenuOpen = false"
                         class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">
                         {{ $nav->name }}
