@@ -13,7 +13,7 @@
                 <nav class="flex justify-center mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('index') }}"
+                            <a href="{{ route('index') }}" wire:navigate.hover
                                 class="inline-flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors">
                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     @if(isset($breadcrumb['url']))
-                                        <a href="{{ $breadcrumb['url'] }}" class="ml-1 text-sm font-medium text-white/80 hover:text-white md:ml-2">
+                                        <a href="{{ $breadcrumb['url'] }}" wire:navigate.hover class="ml-1 text-sm font-medium text-white/80 hover:text-white md:ml-2">
                                             {{ $breadcrumb['label'] }}
                                         </a>
                                     @else

@@ -19,14 +19,14 @@
             <nav class="hidden lg:flex items-center gap-8">
                 @if (request()->routeIs('index'))
                     <a href="#"
-                        class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group">
+                        class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-colors duration-300 relative group">
                         Home
                         <span
                             class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
                     </a>
                 @else
                     <a href="{{ route('index') }}" wire:navigate.hover
-                        class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group">
+                        class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-colors duration-300 relative group">
                         Home
                         <span
                             class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
@@ -38,7 +38,7 @@
                         <div
                             class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--adaptive:adaptive] [--is-collapse:true] md:[--is-collapse:false] ">
                             <button id="bale-dindik-{{$nav->slug}}" type="button"
-                                class="hs-dropdown-toggle w-full flex items-center text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group focus:outline-hidden hs-scrollspy-active:bg-gray-100 dark:hs-scrollspy-active:bg-neutral-700"
+                                class="hs-dropdown-toggle w-full flex items-center text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-colors duration-300 relative group focus:outline-hidden hs-scrollspy-active:bg-gray-100 dark:hs-scrollspy-active:bg-neutral-700"
                                 aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
 
 
@@ -59,7 +59,7 @@
 
                                     @foreach ($nav->children as $navItem)
                                         <div>
-                                            <a class="flex items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
+                                            <a class="flex items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
                                                 @if ($navItem->url_mode) href="{{ $navItem->url }}"
                                                 target="{{ $navItem->target ?? '_self' }}" @else
                                                     href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover
@@ -73,7 +73,7 @@
                         </div>
 
                     @else
-                        <a class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 relative group"
+                        <a class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-colors duration-300 relative group"
                             @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" @else
                             href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover @endif>
                             {{ $nav->name }}
@@ -87,7 +87,7 @@
             {{-- Right Side Actions (Desktop: toggle only, Mobile: toggle + hamburger) --}}
             <div class="flex items-center gap-2">
                 {{-- Dark Mode Toggle --}}
-                <x-bale-emperan::dark-mode-toggle />
+                <x-bale-dindik::dark-mode-toggle />
 
                 {{-- Mobile Menu Button --}}
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden p-2 text-primary dark:text-white">

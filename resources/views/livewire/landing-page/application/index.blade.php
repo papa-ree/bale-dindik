@@ -26,7 +26,7 @@
                         class="w-full pl-12 pr-4 py-4 text-base border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-700 dark:text-white rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-slate-500" />
                     <!-- Clear Icon -->
                     <button x-show="searchQuery.length > 0" @click="searchQuery = ''"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-all">
+                        class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-primary transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-x">

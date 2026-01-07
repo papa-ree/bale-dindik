@@ -48,6 +48,7 @@ class BaleDindikServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
+        $this->offerPublishing();
 
         $this->registerViews();
         $this->registerLivewireComponents();
@@ -59,6 +60,19 @@ class BaleDindikServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/views',
             'bale-dindik'
         );
+    }
+
+    protected function offerPublishing(): void
+    {
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
+
+        // Publish config
+        $this->publishes([
+            __DIR__ . '/../resources/views/errors' => resource_path('views/errors'),
+        ], 'dindik:errors');
+
     }
 
     protected function registerLivewireComponents(): void
