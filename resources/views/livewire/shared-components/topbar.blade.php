@@ -57,11 +57,14 @@
                                 role="menu" aria-orientation="vertical" aria-labelledby="bale-dindik-{{$nav->slug}}">
                                 <div class="py-1 md:px-1 space-y-0.5">
 
+                                    {{-- sub nav --}}
                                     @foreach ($nav->children as $navItem)
                                         <div>
                                             <a class="flex items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
                                                 @if ($navItem->url_mode) href="{{ $navItem->url }}"
-                                                target="{{ $navItem->target ?? '_self' }}" @else
+                                                target="{{ $navItem->target ?? '_self' }}" 
+                                                {{ Illuminate\Support\Str::startsWith($navItem->url, '/') ? 'wire:navigate.hover' : '' }}
+                                                @else
                                                     href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover
                                                 @endif>
                                                 {{ $navItem->name }}
@@ -74,8 +77,11 @@
 
                     @else
                         <a class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-colors duration-300 relative group"
-                            @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" @else
-                            href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover @endif>
+                            @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" 
+                                {{ Illuminate\Support\Str::startsWith($nav->url, '/') ? 'wire:navigate.hover' : '' }} 
+                            @else
+                            href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover 
+                            @endif>
                             {{ $nav->name }}
                             <span
                                 class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
@@ -90,7 +96,7 @@
                 <x-bale-dindik::dark-mode-toggle />
 
                 {{-- Mobile Menu Button --}}
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden p-2 text-primary dark:text-white">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden p-2 text-primary dark:text-white cursor-pointer">
                     <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16">
@@ -120,10 +126,10 @@
 
             @foreach ($this->availableNavs as $key => $nav)
                 @if ($nav->children->isNotEmpty())
-                    <div class="hs-accordion-group">
+                    <div class="hs-accordion-group" wire:key="{{$key . $nav->slug}}">
                         <div class="hs-accordion" id="{{$key . $nav->slug}}-nav">
                             <button
-                                class="hs-accordion-toggle hs-accordion-active:text-primary py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-primary dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-hidden dark:focus:text-neutral-400"
+                                class="hs-accordion-toggle hs-accordion-active:text-primary hover:text-primary py-3 cursor-pointer inline-flex items-center justify-between gap-x-3 w-full text-start text-gray-800 font-medium rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-primary dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-hidden dark:focus:text-neutral-400"
                                 aria-expanded="false" aria-controls="{{$key . $nav->slug}}">
                                 {{ $nav->name }}
                                 <svg class="hs-accordion-active:hidden block size-4" xmlns="http://www.w3.org/2000/svg"
@@ -139,13 +145,16 @@
                             </button>
                             <div id="{{$key . $nav->slug}}"
                                 class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-                                role="region" aria-labelledby="{{$key . $nav->slug}}-nav">
+                                role="region" aria-labelledby="{{$key . $nav->slug}}-nav" >
                                 <div class="container mx-auto px-4 py-2 flex flex-col gap-1">
                                     @foreach ($nav->children as $navItem)
                                         <a @if ($navItem->url_mode) href="{{ $navItem->url }}"
-                                        target="{{ $navItem->target ?? '_self' }}" @else
-                                            href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover @endif
-                                            @click="mobileMenuOpen = false"
+                                            target="{{ $navItem->target ?? '_self' }}"
+                                            {{ Illuminate\Support\Str::startsWith($navItem->url, '/') ? 'wire:navigate.hover' : '' }} 
+                                        @else
+                                            href="{{ route('bale.view-page', $navItem->page_slug ?? '404') }}" wire:navigate.hover 
+                                        @endif
+                                            @click="mobileMenuOpen = false" wire:key="{{$navItem->slug}}"
                                             class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">
                                             {{ $navItem->name }}
                                         </a>
@@ -155,8 +164,11 @@
                         </div>
                     </div>
                 @else
-                    <a @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" @else
-                    href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover @endif
+                    <a @if ($nav->url_mode) href="{{ $nav->url }}" target="{{ $nav->target ?? '_self' }}" 
+                        {{ Illuminate\Support\Str::startsWith($nav->url, '/') ? 'wire:navigate.hover' : '' }} 
+                        @else
+                            href="{{ route('bale.view-page', $nav->page_slug ?? '404') }}" wire:navigate.hover 
+                        @endif
                         @click="mobileMenuOpen = false"
                         class="text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white font-medium transition-colors duration-300 py-2">
                         {{ $nav->name }}
