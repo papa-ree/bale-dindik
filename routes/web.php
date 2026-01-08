@@ -11,10 +11,7 @@ use Paparee\BaleDindik\Livewire\LandingPage\Post\Index as PostIndex;
 use Paparee\BaleDindik\Livewire\LandingPage\Post\PostList;
 use Paparee\BaleDindik\Livewire\LandingPage\Post\Show as PostShow;
 
-use Paparee\BaleDindik\Http\Controllers\SitemapController;
-
 Route::middleware(['web'])->group(function () {
-    Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
     Route::get('/', Index::class)->name('index');
 
     Route::name('bale.')->group(function () {

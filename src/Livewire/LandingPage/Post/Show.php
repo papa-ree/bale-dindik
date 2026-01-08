@@ -26,10 +26,6 @@ class Show extends Component
     {
         return view('bale-dindik::livewire.landing-page.post.show', [
             'post' => $this->post
-        ])->layoutData([
-                    'title' => $this->post->meta_title ?: $this->post->title,
-                    'description' => $this->post->meta_description,
-                    'keywords' => $this->post->meta_keywords,
-                ]);
+        ]);
     }
 }

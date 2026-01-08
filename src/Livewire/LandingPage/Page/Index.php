@@ -25,10 +25,6 @@ class Index extends Component
     {
         return view('bale-dindik::livewire.landing-page.page.index', [
             'page' => $this->page
-        ])->layoutData([
-                    'title' => $this->page->meta_title ?: $this->page->title,
-                    'description' => $this->page->meta_description,
-                    'keywords' => $this->page->meta_keywords,
-                ]);
+        ]);
     }
 }
