@@ -63,6 +63,7 @@
                     @foreach($hero['buttons'] as $button)
                         @if($button['show'])
                             <a href="{{ $button['url'] }}" target="{{ $button['target'] ?? '_self' }}"
+                            {{ Illuminate\Support\Str::startsWith($button['url'], '/') ? 'wire:navigate.hover' : '' }}
                                 class="{{ $button['class'] ?? 'bg-white text-primary' }}">
 
                                 {{ $button['label'] }}
