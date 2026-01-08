@@ -5,8 +5,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ 'Dinas Pendidikan Kabupaten Ponorogo' }}</title>
+    <title>{{ $title ?? 'Dinas Pendidikan Kabupaten Ponorogo' }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    <meta name="description"
+        content="{{ $description ?? 'Situs resmi Dinas Pendidikan Kabupaten Ponorogo. Informasi pendidikan, sekolah, dan layanan masyarakat.' }}">
+    <meta name="keywords"
+        content="{{ $keywords ?? 'dindik ponorogo, dinas pendidikan, ponorogo, pendidikan ponorogo' }}">
+    <meta name="author" content="Papa Ree">
+    <meta name="robots" content="index, follow">
+
+    {{-- Canonical --}}
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph / Facebook --}}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ $title ?? 'Dinas Pendidikan Kabupaten Ponorogo' }}">
+    <meta property="og:description" content="{{ $description ?? 'Situs resmi Dinas Pendidikan Kabupaten Ponorogo.' }}">
+    <meta property="og:image" content="{{ asset('img/og-image.jpg') }}">
+
+    {{-- Twitter --}}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="{{ $title ?? 'Dinas Pendidikan Kabupaten Ponorogo' }}">
+    <meta property="twitter:description"
+        content="{{ $description ?? 'Situs resmi Dinas Pendidikan Kabupaten Ponorogo.' }}">
+    <meta property="twitter:image" content="{{ asset('img/og-image.jpg') }}">
+
+    @yield('meta')
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Dinas Pendidikan Kabupaten Ponorogo",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset('img/logo.png') }}",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+62-xxx-xxxx",
+            "contactType": "customer service"
+        }
+    }
+    </script>
+    @yield('schema')
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
