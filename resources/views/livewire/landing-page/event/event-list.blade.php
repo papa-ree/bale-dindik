@@ -1,5 +1,60 @@
 <div class="min-h-screen bg-gray-50 dark:bg-slate-900">
     <x-bale-dindik::header-page title="Agenda & Kegiatan" :breadcrumbs="[['label' => 'Agenda']]" />
+    
+    {{-- Mobile/Tablet Sticky Filter --}}
+    <section class="lg:hidden sticky top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
+                <div class="space-y-4">
+                    {{-- Search --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cari Agenda</label>
+                        <div class="relative flex gap-2">
+                            <div class="relative grow">
+                                <input type="text" wire:model="search" wire:keydown.enter="$refresh" placeholder="Nama agenda..."
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white">
+                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <button wire:click="$refresh" type="button" class="px-4 py-2.5 bg-primary text-white font-medium rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                                Cari
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Date Picker --}}
+                    <div x-data="{
+                        picker: null,
+                        init() {
+                            this.picker = flatpickr(this.$refs.picker, {
+                                mode: 'range',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: @js($date),
+                                onChange: (selectedDates, dateStr) => {
+                                    @this.set('date', dateStr);
+                                }
+                            });
+                        }
+                    }">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pilih Tanggal</label>
+                        <div class="relative">
+                            <input x-ref="picker" type="text" placeholder="Rentang tanggal..."
+                                class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white cursor-pointer">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <button type="button" @click="@this.set('date', ''); picker.clear()" x-show="@this.date" class="absolute right-3 top-3 text-gray-400 hover:text-red-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -9,7 +64,7 @@
                 {{-- Loading Skeleton --}}
                 <div wire:loading class="space-y-12 w-full">
                     <div class="relative">
-                        <div class="sticky top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
+                        <div class="sticky top-85 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
                             <div class="h-8 w-48 bg-gray-200 dark:bg-slate-700 rounded animate-pulse"></div>
                         </div>
                         <div class="grid gap-6">
@@ -34,7 +89,8 @@
                 <div wire:loading.remove>
                     @forelse ($this->groupedEvents as $monthYear => $events)
                         <div class="relative">
-                            <div class="sticky top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
+                            {{-- mount year --}}
+                            <div class="sticky top-85 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
                                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                                     <span class="w-1.5 h-8 bg-primary rounded-full"></span>
                                     {{ $monthYear }}
@@ -72,6 +128,39 @@
                                                 <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                                                     {{ $event['description'] }}
                                                 </p>
+
+                                                {{-- Share Button --}}
+                                                <div x-data="{
+                                                    copied: false,
+                                                    share() {
+                                                        const text = `{{ $event['name'] }}\n\n{{ $event['description'] }}\n\nInfo lebih lanjut: {{ route('index') }}`;
+                                                        if (navigator.share) {
+                                                            navigator.share({
+                                                                title: '{{ $event['name'] }}',
+                                                                text: text,
+                                                                url: '{{ route('index') }}'
+                                                            }).catch(console.error);
+                                                        } else {
+                                                            navigator.clipboard.writeText(text).then(() => {
+                                                                this.copied = true;
+                                                                setTimeout(() => this.copied = false, 2000);
+                                                            });
+                                                        }
+                                                    }
+                                                }">
+                                                    <button @click="share" 
+                                                        class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-slate-700/50 hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary rounded-lg transition-all duration-300 group/btn">
+                                                        <div class="relative">
+                                                            <svg x-show="!copied" class="w-4 h-4 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                                            </svg>
+                                                            <svg x-show="copied" x-cloak class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <span x-text="copied ? 'Tersalin!' : 'Bagikan'" class="text-sm font-medium"></span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +184,7 @@
             {{-- Sidebar --}}
             <div class="lg:col-span-4 space-y-8">
                 {{-- Filters --}}
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm sticky top-28">
+                <div class="hidden lg:block bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm sticky top-28">
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6">Filter Agenda</h3>
                     
                     <div class="space-y-4">
