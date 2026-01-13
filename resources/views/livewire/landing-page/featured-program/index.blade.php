@@ -22,7 +22,8 @@
                             class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                             <div class="relative overflow-hidden h-64">
                                 <img src="{{$item['image']}}" alt="{{$item['name']}}"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    loading="lazy" decoding="async" />
 
                                 <div
                                     class="absolute inset-0 bg-linear-to-t from-primary/90 via-primary/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300">

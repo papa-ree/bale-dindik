@@ -16,7 +16,7 @@
                         <div class="shrink-0">
                             @if(!empty($meta['foto pimpinan']['path']))
                                 <img src="{{ route('media.show', $meta['foto pimpinan']['path']) }}"
-                                    alt="Dr. Suhartono, M.Pd." class="w-48 h-48 rounded-lg object-cover shadow-md" />
+                                    alt="{{ $meta['nama pimpinan'] ?? 'kosong' }}" class="w-48 h-48 rounded-lg object-cover shadow-md" loading="lazy" decoding="async" />
                             @endif
                         </div>
                         <div class="flex-1 text-center md:text-left">

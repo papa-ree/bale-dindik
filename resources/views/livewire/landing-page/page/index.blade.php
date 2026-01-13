@@ -13,7 +13,7 @@
                 <article class="max-w-none">
                     <div class="">
                         @if($page->content)
-                            <x-bale-emperan::editorjs-renderer :content="$page->content" />
+                            <x-emperan::editorjs-renderer :content="$page->content" />
                         @else
                             <p class="text-gray-500 dark:text-gray-400 text-center py-8">
                                 Tidak ada konten untuk ditampilkan.

@@ -23,7 +23,7 @@
                         <article class="max-w-none">
                             <div class="prose prose-lg dark:prose-invert max-w-none">
                                 @if ($post->content)
-                                    <x-bale-emperan::editorjs-renderer :content="$post->content" />
+                                    <x-emperan::editorjs-renderer :content="$post->content" />
                                 @else
                                     <p class="text-gray-500 dark:text-gray-400 text-center py-8">
                                         Tidak ada konten untuk ditampilkan.
