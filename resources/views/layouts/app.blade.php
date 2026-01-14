@@ -17,7 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 
-    <x-emperan::google-tag />
+    <x-emperan::balystics-tag />
 
 </head>
 
