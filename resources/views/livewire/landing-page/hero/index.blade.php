@@ -6,7 +6,7 @@
         @if(!empty($hero['backgrounds']))
             @foreach($hero['backgrounds'] as $bg)
                 @if($bg['type'] === 'image')
-                    <img src="{{ route('media.show', organization_slug() . '/landing-page/' . $bg['path']) }}"
+                    <img src="{{ cdn_asset('landing-page/' . $bg['path']) }}"
                         alt="{{ $bg['alt'] ?? '' }}" class="w-full h-full object-cover absolute inset-0" loading="lazy" decoding="async" />
                 @endif
             @endforeach

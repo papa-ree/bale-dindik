@@ -5,7 +5,7 @@
             <!-- Logo -->
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12rounded-lg flex items-center justify-center">
-                    <img src="{{ route('media.show', 'shared/logo-png.png') }}" class="size-10 h-auto" loading="lazy" decoding="async"
+                    <img src="{{ cdn_asset('shared/logo-png.png') }}" class="size-10 h-auto" loading="lazy" decoding="async"
                         alt="logo ponorogo">
                 </div>
                 <div>

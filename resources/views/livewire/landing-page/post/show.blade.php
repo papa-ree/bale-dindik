@@ -14,7 +14,7 @@
                         {{-- Featured Image --}}
                         @if ($post->thumbnail)
                             <div class="mb-10 rounded-2xl overflow-hidden shadow-2xl">
-                                <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $post->thumbnail) }}"
+                                <img src="{{ cdn_asset('thumbnails/' . $post->thumbnail) }}"
                                     alt="{{ $post->title }}" class="w-full h-auto object-cover max-h-[500px]" />
                             </div>
                         @endif

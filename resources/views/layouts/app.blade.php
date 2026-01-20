@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Dinas Pendidikan Kabupaten Ponorogo' }}</title>
-    <link rel="icon" type="image/x-icon" href="{{ route('media.show', 'shared/favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ cdn_asset('shared/favicon.ico') }}">
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

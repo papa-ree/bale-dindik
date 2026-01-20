@@ -11,12 +11,14 @@
                     </h2>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-lg p-8 md:p-12 border border-gray-200 dark:border-slate-700 shadow-lg">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-lg p-8 md:p-12 border border-gray-200 dark:border-slate-700 shadow-lg">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
                         <div class="shrink-0">
                             @if(!empty($meta['foto pimpinan']['path']))
-                                <img src="{{ route('media.show', $meta['foto pimpinan']['path']) }}"
-                                    alt="{{ $meta['nama pimpinan'] ?? 'kosong' }}" class="w-48 h-48 rounded-lg object-cover shadow-md" loading="lazy" decoding="async" />
+                                <img src="{{ cdn_asset($meta['foto pimpinan']['path']) }}"
+                                    alt="{{ $meta['nama pimpinan'] ?? 'kosong' }}"
+                                    class="w-48 h-48 rounded-lg object-cover shadow-md" loading="lazy" decoding="async" />
                             @endif
                         </div>
                         <div class="flex-1 text-center md:text-left">
@@ -38,17 +40,18 @@
             <div class="max-w-6xl mx-auto mb-20">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach ($items as $loopIndex => $item)
-                        <div class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
+                        <div
+                            class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                             <div class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-2 odometer" x-data="{
-                                                    endVal: {{ $item['count'] ?? 0 }},
-                                                    initOdometer() {
-                                                        // Odometer automatically watches for class 'odometer' and value changes
-                                                        // We just need to set the value after a short delay to trigger animation
-                                                        setTimeout(() => {
-                                                            this.$el.innerHTML = this.endVal;
-                                                        }, 100);
-                                                    }
-                                                }" x-init="initOdometer()">
+                                                        endVal: {{ $item['count'] ?? 0 }},
+                                                        initOdometer() {
+                                                            // Odometer automatically watches for class 'odometer' and value changes
+                                                            // We just need to set the value after a short delay to trigger animation
+                                                            setTimeout(() => {
+                                                                this.$el.innerHTML = this.endVal;
+                                                            }, 100);
+                                                        }
+                                                    }" x-init="initOdometer()">
                                 0
                             </div>
                             <div class="text-gray-600 dark:text-slate-400 font-medium">{{$item['name'] ?? 'kosong'}}</div>

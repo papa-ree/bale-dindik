@@ -5,20 +5,25 @@
         subtitle="Dapatkan informasi terbaru seputar kegiatan dan perkembangan Dinas Pendidikan Kabupaten Ponorogo." />
 
     {{-- Search Form Sticky --}}
-    <section class="sticky top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
+    <section
+        class="sticky top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
                         {{-- Search Input --}}
                         <div class="lg:col-span-5">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cari Berita</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cari
+                                Berita</label>
                             <div class="relative">
-                                <input type="text" wire:model="search" wire:keydown.enter="$refresh" 
+                                <input type="text" wire:model="search" wire:keydown.enter="$refresh"
                                     placeholder="Judul berita..."
                                     class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white">
-                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </div>
                         </div>
@@ -37,18 +42,22 @@
                                 });
                             }
                         }">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pilih Tanggal</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pilih
+                                Tanggal</label>
                             <div class="relative">
                                 <input x-ref="picker" type="text" placeholder="Rentang tanggal..."
                                     class="w-full pl-10 pr-10 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white cursor-pointer">
-                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3 pointer-events-none" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
                                 </svg>
-                                <button type="button" @click="@this.set('date', ''); picker.clear()" 
-                                    x-show="@this.date" 
+                                <button type="button" @click="@this.set('date', ''); picker.clear()" x-show="@this.date"
                                     class="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-red-500 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </button>
                             </div>
@@ -56,16 +65,17 @@
 
                         {{-- Action Buttons --}}
                         <div class="lg:col-span-2 flex items-end gap-2">
-                            <button wire:click="$refresh" type="button" 
+                            <button wire:click="$refresh" type="button"
                                 class="flex-1 px-4 py-2.5 bg-primary text-white cursor-pointer font-medium rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                                 Cari
                             </button>
                             @if($search || $date)
-                                <button wire:click="search = ''; date = ''" @click="$wire.$refresh()" type="button" 
+                                <button wire:click="search = ''; date = ''" @click="$wire.$refresh()" type="button"
                                     class="px-4 py-2.5 bg-gray-100 dark:bg-slate-700 cursor-pointer text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
                                     title="Reset Filter">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </button>
                             @endif
@@ -83,7 +93,8 @@
             <div wire:loading class="w-full">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
                     @foreach(range(1, 3) as $i)
-                        <div class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 animate-pulse">
+                        <div
+                            class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 animate-pulse">
                             <div class="block">
                                 {{-- Image Placeholder --}}
                                 <div class="relative overflow-hidden h-48 bg-gray-200 dark:bg-slate-700"></div>
@@ -120,15 +131,15 @@
                 </div>
             </div>
 
-            <div wire:loading.remove class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+            <div wire:loading.remove
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
                 @forelse ($this->posts as $post)
                     <div wire:key='{{ $post->slug }}'
                         class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <a href="{{ route('bale.view-post', $post->slug) }}" class="block" wire:navigate.hover>
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
-                                    <img src="{{ route('media.show', organization_slug() . '/thumbnails/' . $post->thumbnail) }}"
-                                        alt=""
+                                    <img src="{{ cdn_asset('thumbnails/' . $post->thumbnail) }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else
                                     <div
@@ -177,9 +188,11 @@
                     </div>
                 @empty
                     <div class="col-span-full text-center py-20">
-                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-800 mb-4">
+                        <div
+                            class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-800 mb-4">
                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-1">Tidak ada berita ditemukan</h3>

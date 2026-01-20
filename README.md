@@ -51,10 +51,28 @@ php artisan vendor:publish --tag="bale-dindik-views"
 
 ## Usage
 
-```php
-$baleDindik = new Paparee\BaleDindik();
-echo $baleDindik->echoPhrase('Hello, Paparee!');
+### Asset Usage (CDN)
+
+Seluruh asset gambar dan file statis di package ini disarankan menggunakan helper `cdn_asset()` yang disediakan oleh package `bale-emperan`.
+
+#### Contoh di Blade
+
+```blade
+{{-- Logo Shared --}}
+<img src="{{ cdn_asset('shared/logo-png.png') }}" alt="Logo">
+
+{{-- Thumbnail Berita (Otomatis menggunakan organization slug) --}}
+<img src="{{ cdn_asset('thumbnails/' . $post->thumbnail) }}" alt="{{ $post->title }}">
+
+{{-- Asset Khusus Landing Page --}}
+<img src="{{ cdn_asset('landing-page/' . $bg['path']) }}" alt="Background">
 ```
+
+#### Keuntungan
+
+- **Performa**: Aset dimuat dari CDN (misal: `cdn.ponorogo.go.id`).
+- **Efisiensi**: Otomatis menangani path organisasi berdasarkan data di database.
+- **Fallback**: Jika CDN dinonaktifkan, otomatis kembali ke path lokal.
 
 ## Testing
 
