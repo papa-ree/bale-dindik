@@ -59,7 +59,7 @@
 
                                     @foreach ($nav->children as $navItem)
                                         <div>
-                                            <a class="flex items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
+                                            <a class="flex max-h-1/2 overscroll-auto items-center p-2 text-gray-700 dark:text-slate-300 hover:text-primary dark:hover:text-white cursor-pointer font-medium transition-color duration-300 ease-in-out group rounded-lg md:px-3 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
                                                 @if ($navItem->url_mode) href="{{ $navItem->url }}"
                                                 target="{{ $navItem->target ?? '_self' }}"
                                                 {{ Illuminate\Support\Str::startsWith($navItem->url, '/') ? 'wire:navigate.hover' : '' }} @else
