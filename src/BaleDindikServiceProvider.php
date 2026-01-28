@@ -45,13 +45,26 @@ class BaleDindikServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->booted(function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        });
+        // Only load routes if this landing page is active
+        if ($this->isActiveLandingPage()) {
+            $this->app->booted(function () {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            });
+        }
+
         $this->offerPublishing();
 
         $this->registerViews();
         $this->registerLivewireComponents();
+    }
+
+    /**
+     * Check if this landing page is currently active
+     */
+    protected function isActiveLandingPage(): bool
+    {
+        $activePage = config('landing-page.active', 'dindik');
+        return $activePage === 'dindik';
     }
 
     protected function registerViews(): void
