@@ -53,11 +53,9 @@
                                 </svg>
                             </button>
 
-                            <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-150 hs-dropdown-open:opacity-100 opacity-0 relative w-full md:w-56 hidden z-10 top-full ps-7 md:ps-0 md:bg-white/95 md:rounded-lg md:shadow-md before:absolute before:-top-4 before:start-0 before:w-full before:h-5 md:after:hidden after:absolute after:top-1 after:start-4.5 after:w-0.5 after:h-[calc(100%-4px)] after:bg-gray-100 dark:bg-slate-800 dark:md:bg-slate-800/95 dark:after:bg-slate-700
-                            scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none
-                            "
+                            <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-150 hs-dropdown-open:opacity-100 opacity-0 relative w-full md:w-56 hidden z-10 top-full ps-7 md:ps-0 md:bg-white/95 md:rounded-lg md:shadow-md before:absolute before:-top-4 before:start-0 before:w-full before:h-5 md:after:hidden after:absolute after:top-1 after:start-4.5 after:w-0.5 after:h-[calc(100%-4px)] after:bg-gray-100 dark:bg-slate-800 dark:md:bg-slate-800/95 dark:after:bg-slate-700"
                                 role="menu" aria-orientation="vertical" aria-labelledby="bale-dindik-{{$nav->slug}}">
-                                <div class="py-1 md:px-1 space-y-0.5 max-h-[calc(100vh-140px)] overflow-y-auto">
+                                <div class="py-1 md:px-1 space-y-0.5 max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
 
                                     @foreach ($nav->children as $navItem)
                                         <div>
@@ -144,7 +142,7 @@
                             <div id="{{$key . $nav->slug}}"
                                 class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
                                 role="region" aria-labelledby="{{$key . $nav->slug}}-nav">
-                                <div class="container mx-auto px-4 py-2 flex flex-col gap-1 max-h-[50vh] overflow-y-auto">
+                                <div class="container mx-auto px-4 py-2 flex flex-col gap-1 max-h-[50vh] overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
                                     @foreach ($nav->children as $navItem)
                                         <a @if ($navItem->url_mode) href="{{ $navItem->url }}" 
                                         target="{{ $navItem->target ?? '_self' }}"
