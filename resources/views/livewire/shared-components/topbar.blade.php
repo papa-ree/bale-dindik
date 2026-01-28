@@ -1,4 +1,4 @@
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm select-none"
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm select-none "
     x-data="{mobileMenuOpen: false}" @click.away="mobileMenuOpen=false">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
@@ -53,7 +53,9 @@
                                 </svg>
                             </button>
 
-                            <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-150 hs-dropdown-open:opacity-100 opacity-0 relative w-full md:w-56 hidden z-10 top-full ps-7 md:ps-0 md:bg-white/95 md:rounded-lg md:shadow-md before:absolute before:-top-4 before:start-0 before:w-full before:h-5 md:after:hidden after:absolute after:top-1 after:start-4.5 after:w-0.5 after:h-[calc(100%-4px)] after:bg-gray-100 dark:bg-slate-800 dark:md:bg-slate-800/95 dark:after:bg-slate-700"
+                            <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-150 hs-dropdown-open:opacity-100 opacity-0 relative w-full md:w-56 hidden z-10 top-full ps-7 md:ps-0 md:bg-white/95 md:rounded-lg md:shadow-md before:absolute before:-top-4 before:start-0 before:w-full before:h-5 md:after:hidden after:absolute after:top-1 after:start-4.5 after:w-0.5 after:h-[calc(100%-4px)] after:bg-gray-100 dark:bg-slate-800 dark:md:bg-slate-800/95 dark:after:bg-slate-700
+                            scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none
+                            "
                                 role="menu" aria-orientation="vertical" aria-labelledby="bale-dindik-{{$nav->slug}}">
                                 <div class="py-1 md:px-1 space-y-0.5 max-h-[calc(100vh-140px)] overflow-y-auto">
 
@@ -110,7 +112,7 @@
 
     <!-- Mobile Menu -->
     <div x-show="mobileMenuOpen" x-cloak x-transition
-        class="lg:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
+        class="lg:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
         <nav class="container mx-auto px-4 py-2 flex flex-col gap-1">
             @if (request()->routeIs('index'))
                 <a href="#" @click.prevent="mobileMenuOpen = false"

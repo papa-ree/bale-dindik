@@ -59,12 +59,12 @@
 
             {{-- BUTTONS --}}
             @if(!empty($hero['buttons']))
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex flex-col sm:flex-row gap-4 z-20">
                     @foreach($hero['buttons'] as $button)
                         @if($button['show'])
                             <a href="{{ $button['url'] }}" target="{{ $button['target'] ?? '_self' }}"
                             {{ Illuminate\Support\Str::startsWith($button['url'], '/') ? 'wire:navigate.hover' : '' }}
-                                class="{{ $button['class'] ?? 'bg-white text-primary' }}">
+                                class="{{ $button['class'] ?? 'bg-white text-primary' }} z-20">
 
                                 {{ $button['label'] }}
 
@@ -84,7 +84,7 @@
 
     <!-- Bottom Gradient -->
     <div
-        class="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-neutral dark:from-slate-900 to-transparent z-10">
+        class="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-neutral dark:from-slate-900 to-transparent z-10">
     </div>
 
 </section>
