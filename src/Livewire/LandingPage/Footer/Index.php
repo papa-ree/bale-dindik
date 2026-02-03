@@ -14,7 +14,7 @@ class Index extends Component
 
     public function mount()
     {
-        $section = Section::whereSlug('footer-section')->firstOrFail();
+        $section = Section::whereSlug('footer-section')->first();
 
         $this->footer = $section?->content ?? [];
     }
