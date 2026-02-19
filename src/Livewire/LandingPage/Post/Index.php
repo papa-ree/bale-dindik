@@ -10,11 +10,19 @@ use Bale\Emperan\Models\Section;
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component
 {
+    public string $slug = 'post-section';
     public array $section = [];
+    public $actived;
 
-    public function mount()
+    public function mount(?string $slug = null)
     {
-        $section = Section::whereSlug('post-section')->first();
+        if ($slug) {
+            $this->slug = $slug;
+        }
+
+        $section = Section::whereSlug($this->slug)->first();
+
+        $this->actived = $section?->actived;
 
         $this->section = $section?->content ?? [];
     }
@@ -25,8 +33,21 @@ class Index extends Component
     }
 
     #[Computed]
+    public function meta()
+    {
+        return $this->section['meta'] ?? [];
+    }
+
+    #[Computed]
+    public function items()
+    {
+        return $this->section['items'] ?? [];
+    }
+
+    #[Computed]
     public function availablePosts()
     {
-        return Post::latest()->wherePublished(true)->take($this->section['layouts']['post_limit'])->get();
+        $postLimit = $this->meta['custom']['post_limit'] ?? 3;
+        return Post::latest()->wherePublished(true)->take($postLimit)->get();
     }
 }

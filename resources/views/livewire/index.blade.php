@@ -1,6 +1,6 @@
 <div>
     <div data-aos="fade-down">
-        <livewire:bale-dindik.landing-page.hero.index />
+        <livewire:bale-dindik.landing-page.hero.index slug="hero-section" />
     </div>
 
     <div data-aos="fade-up">
@@ -8,18 +8,18 @@
     </div>
 
     <div data-aos="fade-up">
-        <livewire:bale-dindik.landing-page.post.index />
+        <livewire:bale-dindik.landing-page.post.index slug="post-section" />
     </div>
 
     <div data-aos="fade-up">
-        <livewire:bale-dindik.landing-page.event.index />
+        <livewire:bale-dindik.landing-page.event.index slug="event-announcement-section" />
     </div>
 
     <div data-aos="fade-up">
-        <livewire:bale-dindik.landing-page.featured-program.index />
+        <livewire:bale-dindik.landing-page.featured-program.index slug="featured-program-section" />
     </div>
 
     <div data-aos="fade-up">
-        <livewire:bale-dindik.landing-page.about.index />
+        <livewire:bale-dindik.landing-page.about.index slug="about-section" />
     </div>
 </div>

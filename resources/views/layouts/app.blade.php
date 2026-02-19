@@ -32,7 +32,7 @@
         {{ $slot }}
     </main>
 
-    <livewire:bale-dindik.landing-page.footer.index />
+    <livewire:bale-dindik.landing-page.footer.index slug="footer-section" />
     @livewireScripts
 
 </body>
