@@ -10,13 +10,20 @@ use Bale\Emperan\Models\Section;
 #[Layout('bale-dindik::layouts.app')]
 class Index extends Component
 {
+    public string $slug = 'application-section';
     public array $section = [];
+    public $actived;
 
-    public function mount()
+    public function mount(?string $slug = null)
     {
-        $section = Section::whereSlug('application-section')->first();
+        if ($slug) {
+            $this->slug = $slug;
+        }
 
-        $this->section = $section?->content ?? [];
+        $sectionModel = Section::whereSlug($this->slug)->first();
+
+        $this->section = $sectionModel?->content ?? [];
+        $this->actived = $sectionModel?->actived ?? false;
     }
 
     public function render()
@@ -25,21 +32,29 @@ class Index extends Component
     }
 
     #[Computed]
+    public function meta()
+    {
+        return $this->section['meta'] ?? [];
+    }
+
+    #[Computed]
     public function availableApps()
     {
         $items = $this->section['items'] ?? [];
 
         return collect($items)->map(function ($item) {
-            if (isset($item['icon'])) {
+            if (!empty($item['icon'])) {
                 $iconName = $item['icon'];
-
-                $item['icon_svg'] = Blade::render(
-                    "<x-lucide-$iconName class='w-6 h-6' />"
-                );
+                try {
+                    $item['icon_svg'] = Blade::render(
+                        "<x-lucide-$iconName class='w-6 h-6' />"
+                    );
+                } catch (\Exception $e) {
+                    $item['icon_svg'] = null;
+                }
             }
-
             return $item;
-        });
+        })->values();
     }
 
     #[Computed]

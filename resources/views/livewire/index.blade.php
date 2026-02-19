@@ -4,7 +4,7 @@
     </div>
 
     <div data-aos="fade-up">
-        <livewire:bale-dindik.landing-page.application.index />
+        <livewire:bale-dindik.landing-page.application.index slug="application-section" />
     </div>
 
     <div data-aos="fade-up">
