@@ -2,20 +2,16 @@
     @if ($actived)
         @if (empty($section) || empty($this->meta))
             {{-- Error Handler: Section Not Found --}}
-            <section class="py-20 bg-neutral dark:bg-slate-900">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">Konten About Tidak Ditemukan</h2>
-                    <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Silakan konfigurasi metadata section ini di
-                        panel admin CMS Anda.</p>
-                </div>
-            </section>
+            <x-emperan::section-error title="Konten About Tidak Ditemukan"
+                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda.">
+                <x-slot:icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </x-slot:icon>
+            </x-emperan::section-error>
         @else
             @php
                 $meta = $this->meta;
@@ -89,13 +85,13 @@
                                     <div
                                         class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                                         <div class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-2 odometer" x-data="{
-                                                                endVal: {{ (int) ($item['count'] ?? 0) }},
-                                                                initOdometer() {
-                                                                    setTimeout(() => {
-                                                                        this.$el.innerHTML = this.endVal;
-                                                                    }, 100);
-                                                                }
-                                                            }" x-init="initOdometer()">
+                                                                                endVal: {{ (int) ($item['count'] ?? 0) }},
+                                                                                initOdometer() {
+                                                                                    setTimeout(() => {
+                                                                                        this.$el.innerHTML = this.endVal;
+                                                                                    }, 100);
+                                                                                }
+                                                                            }" x-init="initOdometer()">
                                             0
                                         </div>
                                         <div class="text-gray-600 dark:text-slate-400 font-medium capitalize">

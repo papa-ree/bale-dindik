@@ -2,20 +2,16 @@
     @if($actived)
         @if (empty($section) || empty($this->meta))
             {{-- Error Handler: Section Not Found --}}
-            <section class="py-20 bg-neutral dark:bg-slate-900">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">Konten Aplikasi Tidak Ditemukan</h2>
-                    <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Silakan konfigurasi metadata section ini di
-                        panel admin CMS Anda.</p>
-                </div>
-            </section>
+            <x-emperan::section-error title="Konten Aplikasi Tidak Ditemukan"
+                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda.">
+                <x-slot:icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                </x-slot:icon>
+            </x-emperan::section-error>
         @else
             @php
                 $meta = $this->meta;
@@ -23,9 +19,9 @@
                 $subtitle = $meta['subtitle'] ?? null;
             @endphp
             <section id="applications" class="py-20 bg-neutral dark:bg-slate-900" x-data="appSection({
-                        apps: @js($this->availableApps),
-                        categories: @js($this->availableCategories)
-                    })" x-cloak>
+                                apps: @js($this->availableApps),
+                                categories: @js($this->availableCategories)
+                            })" x-cloak>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">

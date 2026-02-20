@@ -2,20 +2,15 @@
     @if ($actived)
         @if (empty($section) || empty($this->meta))
             {{-- Error Handler: Section Not Found --}}
-            <section class="py-20 bg-white dark:bg-slate-900">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5l7 7-7 7M5 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">Konten Program Unggulan Tidak Ditemukan</h2>
-                    <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Silakan konfigurasi metadata section ini di
-                        panel admin CMS Anda.</p>
-                </div>
-            </section>
+            <x-emperan::section-error title="Konten Program Unggulan Tidak Ditemukan" message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." class="py-20 bg-white dark:bg-slate-900">
+                <x-slot:icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7M5 5l7 7-7 7" />
+                    </svg>
+                </x-slot:icon>
+            </x-emperan::section-error>
         @else
             @php
                 $meta = $this->meta;
