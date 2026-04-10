@@ -2,7 +2,7 @@
 
     {{-- header --}}
     <x-bale-dindik::header-page :title="$page->title" :breadcrumbs="[['label' => $page->title]]"
-        :subtitle="$page->excerpt" />
+        :subtitle="$page->getExcerpt()" />
 
     {{-- Page Content --}}
     <section class="py-12 md:py-16">

@@ -170,7 +170,7 @@
                                 </h3>
 
                                 <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-4">
-                                    {{ $post->excerpt(100) ?? 'Belum ada konten' }}
+                                    {{ $post->getExcerpt(100) ?? 'Belum ada konten' }}
                                 </p>
 
                                 <span
