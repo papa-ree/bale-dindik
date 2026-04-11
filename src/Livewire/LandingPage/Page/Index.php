@@ -25,6 +25,9 @@ class Index extends Component
     {
         return view('bale-dindik::livewire.landing-page.page.index', [
             'page' => $this->page
+        ])->layout('bale-dindik::layouts.app', [
+            'title' => $this->page->title,
+            'seoModel' => $this->page,
         ]);
     }
 }

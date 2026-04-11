@@ -26,6 +26,9 @@ class Show extends Component
     {
         return view('bale-dindik::livewire.landing-page.post.show', [
             'post' => $this->post
+        ])->layout('bale-dindik::layouts.app', [
+            'title' => $this->post->title,
+            'seoModel' => $this->post,
         ]);
     }
 }
