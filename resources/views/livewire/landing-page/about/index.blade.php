@@ -1,20 +1,12 @@
 <div>
-    @if ($actived)
-        @if (empty($section) || empty($this->meta))
+    @if ($section)
+        @if (empty($section->meta))
             {{-- Error Handler: Section Not Found --}}
-            <x-emperan::section-error title="Konten About Tidak Ditemukan"
-                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda.">
-                <x-slot:icon>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </x-slot:icon>
-            </x-emperan::section-error>
+            <x-umpak::section-error title="Konten About Tidak Ditemukan"
+                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." />
         @else
             @php
-                $meta = $this->meta;
+                $meta = $section->meta;
                 $custom = $meta['custom'] ?? [];
                 $title = $meta['title'] ?? null;
                 $images = $meta['background']['images'] ?? [];
@@ -78,10 +70,10 @@
                     </div>
 
                     <!-- Statistics -->
-                    @if (!empty($this->items))
+                    @if (!empty($section->items))
                         <div class="max-w-6xl mx-auto mb-20">
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                                @foreach ($this->items as $item)
+                                @foreach ($section->items as $item)
                                     <div
                                         class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                                         <div class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-2 odometer" x-data="{

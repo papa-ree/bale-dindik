@@ -1,6 +1,6 @@
 <?php
 
-// config for Paparee/BaleDindik
+// config for Bale/BaleDindik
 return [
 
 ];

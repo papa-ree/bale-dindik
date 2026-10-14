@@ -1,23 +1,16 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Post\Section;
+namespace Bale\BaleDindik\Livewire\LandingPage\Post\Section;
 
+use Bale\Umpak\Livewire\UmpakComponent;
 use Livewire\Attributes\Computed;
-use Livewire\Component;
-use Bale\Emperan\Models\Post;
 
-class SuggestedPosts extends Component
+class SuggestedPosts extends UmpakComponent
 {
-    public $currentSlug;
-
     #[Computed]
     public function suggestedPosts()
     {
-        return Post::where('slug', '!=', $this->currentSlug)
-            ->wherePublished(true)
-            ->latest()
-            ->take(5)
-            ->get();
+        return $this->getRandomPosts(5);
     }
 
     public function render()

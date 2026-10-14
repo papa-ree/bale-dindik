@@ -1,5 +1,5 @@
 <?php
 
-namespace Paparee\BaleDindik;
+namespace Bale\BaleDindik;
 
 class BaleDindik {}

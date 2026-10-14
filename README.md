@@ -1,9 +1,9 @@
 # Bale View of Dindik Company Profile
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/paparee/bale-dindik.svg?style=flat-square)](https://packagist.org/packages/paparee/bale-dindik)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/paparee/bale-dindik/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/paparee/bale-dindik/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/paparee/bale-dindik/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/paparee/bale-dindik/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/paparee/bale-dindik.svg?style=flat-square)](https://packagist.org/packages/paparee/bale-dindik)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/bale/bale-dindik.svg?style=flat-square)](https://packagist.org/packages/bale/bale-dindik)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/bale/bale-dindik/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/bale/bale-dindik/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/bale/bale-dindik/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/bale/bale-dindik/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/bale/bale-dindik.svg?style=flat-square)](https://packagist.org/packages/bale/bale-dindik)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -20,7 +20,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require paparee/bale-dindik
+composer require bale/bale-dindik
 ```
 
 You can publish and run the migrations with:
@@ -53,7 +53,7 @@ php artisan vendor:publish --tag="bale-dindik-views"
 
 ### Asset Usage (CDN)
 
-Seluruh asset gambar dan file statis di package ini disarankan menggunakan helper `cdn_asset()` yang disediakan oleh package `bale-emperan`.
+Seluruh asset gambar dan file statis di package ini disarankan menggunakan helper `cdn_asset()` yang disediakan oleh package `bale-umpak`.
 
 #### Contoh di Blade
 
@@ -61,8 +61,9 @@ Seluruh asset gambar dan file statis di package ini disarankan menggunakan helpe
 {{-- Logo Shared --}}
 <img src="{{ cdn_asset('shared/logo-png.png') }}" alt="Logo">
 
-{{-- Thumbnail Berita (Otomatis menggunakan organization slug) --}}
-<img src="{{ cdn_asset('thumbnails/' . $post->thumbnail) }}" alt="{{ $post->title }}">
+{{-- Thumbnail Berita (sudah berupa full URL dari DTO) --}}
+<img src="{{ $post->thumbnail }}" alt="{{ $post->title }}">
+
 
 {{-- Asset Khusus Landing Page --}}
 <img src="{{ cdn_asset('landing-page/' . $bg['path']) }}" alt="Background">
@@ -94,7 +95,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Papa Ree](https://github.com/paparee)
+- [Papa Ree](https://github.com/bale)
 - [All Contributors](../../contributors)
 
 ## License

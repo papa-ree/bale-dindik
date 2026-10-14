@@ -1,6 +1,6 @@
 <?php
 
-namespace Paparee\BaleDindik\Database\Factories;
+namespace Bale\BaleDindik\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

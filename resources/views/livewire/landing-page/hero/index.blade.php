@@ -1,12 +1,12 @@
-@if (empty($hero) || empty($this->meta))
+@if (empty($section) || empty($section->meta))
     {{-- Error Handler: Section Not Found --}}
-    <x-emperan::section-error 
+    <x-umpak::section-error 
         title="Konten Hero Tidak Ditemukan"
         class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-50 border-y border-slate-200" 
     />
 @else
     @php
-        $meta = $this->meta;
+        $meta = $section->meta;
         $background = $meta['background'] ?? null;
         $images = $background['images'] ?? [];
         $organization = $meta['custom']['organization_name'] ?? null;

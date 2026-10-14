@@ -6,11 +6,11 @@
 
     <div class="space-y-6">
         @forelse ($this->suggestedPosts as $suggested)
-            <a href="{{ route('bale.view-post', $suggested->slug) }}" wire:navigate.hover
+            <a href="{{ route('bale-dindik.post.show', $suggested->slug) }}" wire:navigate.hover
                 class="group flex gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-gray-100 dark:border-slate-700 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-md">
                 <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden">
                     @if ($suggested->thumbnail)
-                        <img src="{{ cdn_asset('thumbnails/' . $suggested->thumbnail) }}" alt=""
+                        <img src="{{ $suggested->thumbnail }}" alt=""
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     @else
                         <div class="w-full h-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
@@ -25,7 +25,7 @@
                 <div class="flex flex-col justify-center py-1">
                     <span
                         class="text-[10px] font-bold text-primary/60 dark:text-primary-light uppercase tracking-wider mb-1">
-                        {{ $suggested->created_at }}
+                        {{ $suggested->formattedDate() }}
                     </span>
                     <h4
                         class="text-sm font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-primary transition-colors duration-300 leading-tight">

@@ -1,15 +1,14 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Post;
+namespace Bale\BaleDindik\Livewire\LandingPage\Post;
 
-use Livewire\Component;
+use Bale\Umpak\Livewire\UmpakComponent;
 use Livewire\Attributes\{Computed, Layout, Url};
-use Bale\Emperan\Models\Post;
 
 #[Layout('bale-dindik::layouts.app')]
-class PostList extends Component
+class PostList extends UmpakComponent
 {
-    public int $amount = 6;
+    public int $amount = 9;
 
     #[Url]
     public string $search = '';
@@ -17,70 +16,36 @@ class PostList extends Component
     #[Url]
     public string $date = '';
 
-    public function updated($property)
+    public function updated($property): void
     {
         // Reset amount when search or date filter changes
         if (in_array($property, ['search', 'date'])) {
-            $this->amount = 6;
+            $this->amount = 9;
         }
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
-        $this->amount += 6;
+        $this->amount += 9;
+    }
+
+    public function clearFilters(): void
+    {
+        $this->search = '';
+        $this->date = '';
+        $this->amount = 9;
     }
 
     #[Computed]
     public function posts()
     {
-        $query = Post::query()->wherePublished(true);
-
-        // Filter by search
-        if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('title', 'like', '%' . $this->search . '%')
-                    ->orWhere('content', 'like', '%' . $this->search . '%');
-            });
-        }
-
-        // Filter by date
-        if ($this->date) {
-            if (str_contains($this->date, ' to ')) {
-                // Range date
-                [$start, $end] = explode(' to ', $this->date);
-                $query->whereBetween('created_at', [$start . ' 00:00:00', $end . ' 23:59:59']);
-            } else {
-                // Single date
-                $query->whereDate('created_at', $this->date);
-            }
-        }
-
-        return $query->latest()->take($this->amount)->get();
+        return $this->searchPosts($this->amount, $this->search, $this->date);
     }
 
     #[Computed]
-    public function hasMore()
+    public function hasMore(): bool
     {
-        $query = Post::query()->wherePublished(true);
-
-        // Apply same filters as posts method
-        if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('title', 'like', '%' . $this->search . '%')
-                    ->orWhere('content', 'like', '%' . $this->search . '%');
-            });
-        }
-
-        if ($this->date) {
-            if (str_contains($this->date, ' to ')) {
-                [$start, $end] = explode(' to ', $this->date);
-                $query->whereBetween('created_at', [$start . ' 00:00:00', $end . ' 23:59:59']);
-            } else {
-                $query->whereDate('created_at', $this->date);
-            }
-        }
-
-        return $query->count() > $this->amount;
+        return $this->countSearchPosts($this->search, $this->date) > $this->amount;
     }
 
     public function render()

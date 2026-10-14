@@ -104,41 +104,33 @@
                                             {{-- Date Badge --}}
                                             <div class="shrink-0 flex flex-row sm:flex-col items-center justify-center sm:w-24 bg-primary/5 dark:bg-primary/10 rounded-xl p-4 sm:p-2 text-center border border-primary/10">
                                                 <span class="text-3xl font-bold text-primary block leading-none">
-                                                    {{ \Carbon\Carbon::parse($event['date'])->format('d') }}
+                                                    {{ $event->startDate->format('d') }}
                                                 </span>
                                                 <span class="text-sm font-medium text-primary/80 uppercase tracking-wider mt-0 sm:mt-1 ml-2 sm:ml-0">
-                                                    {{ \Carbon\Carbon::parse($event['date'])->format('M') }}
+                                                    {{ $event->startDate->format('M') }}
                                                 </span>
                                             </div>
 
                                             {{-- Content --}}
                                             <div class="grow">
                                                 <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
-                                                    @if(isset($event['url']) && $event['url'] !== '#')
-                                                        <a href="{{ $event['url'] ?? '#' }}" target="_blank" class="hover:underline">
-                                                            {{ $event['name'] }}
-                                                        </a>
-                                                        <svg class="w-4 h-4 inline-block text-gray-400 group-hover:text-primary ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                                        </svg>
-                                                    @else
-                                                        {{ $event['name'] }}
-                                                    @endif
+                                                    {{ $event->title }}
                                                 </h3>
                                                 <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                                                    {{ $event['description'] }}
+                                                    {!! nl2br(e($event->description)) !!}
                                                 </p>
 
                                                 {{-- Share Button --}}
                                                 <div x-data="{
                                                     copied: false,
                                                     share() {
-                                                        const text = `{{ $event['name'] }}\n\n{{ $event['description'] }}\n\nInfo lebih lanjut: {{ route('index') }}`;
+                                                        const title = @js($event->title);
+                                                        const text = @js(trim(($event->title ?? '') . "\n\n" . ($event->description ?? '') . "\n\nInfo lebih lanjut: " . route('index')));
                                                         if (navigator.share) {
                                                             navigator.share({
-                                                                title: '{{ $event['name'] }}',
+                                                                title: title,
                                                                 text: text,
-                                                                url: '{{ route('index') }}'
+                                                                url: @js(route('index'))
                                                             }).catch(console.error);
                                                         } else {
                                                             navigator.clipboard.writeText(text).then(() => {
@@ -249,15 +241,15 @@
                             @foreach ($this->upcomingEvents as $upcoming)
                                 <div class="flex gap-4 items-start group">
                                     <div class="shrink-0 w-12 text-center bg-white dark:bg-slate-800 rounded-lg p-1 shadow-xs border border-gray-100 dark:border-slate-700">
-                                        <span class="block text-xs font-bold text-primary">{{ \Carbon\Carbon::parse($upcoming['date'])->format('M') }}</span>
-                                        <span class="block text-lg font-bold text-gray-900 dark:text-white">{{ \Carbon\Carbon::parse($upcoming['date'])->format('d') }}</span>
+                                        <span class="block text-xs font-bold text-primary">{{ $upcoming->startDate->format('M') }}</span>
+                                        <span class="block text-lg font-bold text-gray-900 dark:text-white">{{ $upcoming->startDate->format('d') }}</span>
                                     </div>
                                     <div>
                                         <h4 class="text-sm font-bold text-gray-900 dark:text-white line-clamp-2 mb-1 group-hover:text-primary transition-colors">
-                                            {{ $upcoming['name'] }}
+                                            {{ $upcoming->title }}
                                         </h4>
                                         <span class="text-xs text-gray-500 dark:text-gray-400">
-                                            {{ \Carbon\Carbon::parse($upcoming['date'])->diffForHumans() }}
+                                            {{ $upcoming->startDate->diffForHumans() }}
                                         </span>
                                     </div>
                                 </div>

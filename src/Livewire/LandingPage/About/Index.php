@@ -1,44 +1,24 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\About;
+namespace Bale\BaleDindik\Livewire\LandingPage\About;
 
-use Livewire\Component;
-use Livewire\Attributes\{Computed, Layout};
-use Bale\Emperan\Models\Section;
+use Bale\Umpak\Livewire\UmpakComponent;
 
-#[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
     public string $slug = 'about-section';
-    public array $section = [];
-    public $actived;
 
-    public function mount(?string $slug = null)
+    public function mount(?string $slug = null): void
     {
         if ($slug) {
             $this->slug = $slug;
         }
-
-        $sectionModel = Section::whereSlug($this->slug)->first();
-
-        $this->section = $sectionModel?->content ?? [];
-        $this->actived = $sectionModel?->actived;
     }
 
     public function render()
     {
-        return view('bale-dindik::livewire.landing-page.about.index');
-    }
-
-    #[Computed]
-    public function meta()
-    {
-        return $this->section['meta'] ?? [];
-    }
-
-    #[Computed]
-    public function items()
-    {
-        return $this->section['items'] ?? [];
+        return view('bale-dindik::livewire.landing-page.about.index', [
+            'section' => $this->section($this->slug),
+        ]);
     }
 }

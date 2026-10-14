@@ -1,17 +1,9 @@
 <div>
-    @if ($actived)
-        @if (empty($section) || empty($this->meta))
+    @if ($section)
+        @if (empty($this->meta))
             {{-- Error Handler: Section Not Found --}}
-            <x-emperan::section-error title="Konten Event Tidak Ditemukan"
-                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda.">
-                <x-slot:icon>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                </x-slot:icon>
-            </x-emperan::section-error>
+            <x-umpak::section-error title="Konten Event Tidak Ditemukan"
+                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." />
         @else
             @php
                 $meta = $this->meta;
@@ -51,7 +43,7 @@
                                     </div>
                                     <div class="flex-1">
                                         <h3 class="text-xl font-bold text-primary dark:text-white mb-2 group-hover:text-secondary transition-colors duration-300"
-                                            x-text="event.name"></h3>
+                                            x-text="event.title"></h3>
                                         <p class="text-gray-600 dark:text-slate-400 mb-3" x-text="event.description"></p>
                                         <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,33 +1,33 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Page;
+namespace Bale\BaleDindik\Livewire\LandingPage\Page;
 
-use Livewire\Component;
+use Bale\Umpak\Livewire\UmpakComponent;
 use Livewire\Attributes\{Layout};
-use Bale\Emperan\Models\Page;
 
 #[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
-    public $page;
+    public string $slug;
 
-    public function mount(string $page)
+    public function mount(string $slug): void
     {
-        $this->page = Page::whereSlug($page)->first();
-
-        // Jika halaman tidak ditemukan, redirect atau tampilkan 404
-        if (!$this->page) {
-            abort(404, 'Halaman tidak ditemukan');
-        }
+        $this->slug = $slug;
     }
 
     public function render()
     {
+        $page = $this->page($this->slug);
+
+        if (!$page) {
+            abort(404, 'Halaman tidak ditemukan');
+        }
+
         return view('bale-dindik::livewire.landing-page.page.index', [
-            'page' => $this->page
+            'page' => $page,
         ])->layout('bale-dindik::layouts.app', [
-            'title' => $this->page->title,
-            'seoModel' => $this->page,
+            'title' => $page->title,
+            'seoModel' => $page,
         ]);
     }
 }

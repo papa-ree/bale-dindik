@@ -19,7 +19,7 @@
         $socials = $parsed['social'] ?? [];
 
         // About info from hero section
-        $aboutMeta = $this->about['meta'] ?? [];
+        $aboutMeta = $this->about;
         $orgName = $aboutMeta['custom']['organization_name'] ?? null;
         $orgTitle = $aboutMeta['title'] ?? null;
     @endphp

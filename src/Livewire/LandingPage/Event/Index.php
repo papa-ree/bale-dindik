@@ -1,46 +1,40 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Event;
+namespace Bale\BaleDindik\Livewire\LandingPage\Event;
 
-use Livewire\Component;
-use Livewire\Attributes\{Computed, Layout};
-use Bale\Emperan\Models\Section;
+use Bale\Umpak\Livewire\UmpakComponent;
+use Illuminate\Support\Facades\Blade;
+use Livewire\Attributes\{Computed};
 
-#[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
     public string $slug = 'event-announcement-section';
-    public array $section = [];
-    public $actived;
 
-    public function mount(?string $slug = null)
+    public function mount(?string $slug = null): void
     {
         if ($slug) {
             $this->slug = $slug;
         }
-
-        $section = Section::whereSlug($this->slug)->first();
-
-        $this->section = $section?->content ?? [];
-        $this->actived = $section?->actived;
     }
 
     public function render()
     {
-        return view('bale-dindik::livewire.landing-page.event.index');
+        return view('bale-dindik::livewire.landing-page.event.index', [
+            'section' => $this->section($this->slug),
+        ]);
     }
 
     #[Computed]
     public function meta()
     {
-        $meta = $this->section['meta'] ?? [];
+        $meta = $this->section($this->slug)?->meta ?? [];
 
         if (!empty($meta['buttons'])) {
             $meta['buttons'] = collect($meta['buttons'])->map(function ($button) {
                 if (!empty($button['icon'])) {
                     try {
                         $iconName = $button['icon'];
-                        $button['icon_svg'] = \Illuminate\Support\Facades\Blade::render(
+                        $button['icon_svg'] = Blade::render(
                             "<x-lucide-$iconName class='w-5 h-5' />"
                         );
                     } catch (\Exception $e) {
@@ -55,20 +49,16 @@ class Index extends Component
     }
 
     #[Computed]
-    public function items()
-    {
-        return $this->section['items'] ?? [];
-    }
-
-    #[Computed]
     public function availableEvents()
     {
-        $postLimit = (int) ($this->meta['custom']['post_limit'] ?? 6);
+        $postLimit = (int) ($this->meta['custom']['event_limit'] ?? 4);
 
-        return collect($this->items)
-            ->filter(fn($item) => ($item['date'] ?? '') >= now()->toDateString())
-            ->sortBy('date')
-            ->take($postLimit)
+        return $this->upcomingAgendas($postLimit)
+            ->map(fn ($agenda) => [
+                'title' => $agenda->title,
+                'description' => $agenda->description,
+                'date' => $agenda->startDate->toDateString(),
+            ])
             ->values();
     }
 }

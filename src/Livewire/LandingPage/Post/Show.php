@@ -1,34 +1,33 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Post;
+namespace Bale\BaleDindik\Livewire\LandingPage\Post;
 
-use Livewire\Component;
+use Bale\Umpak\Livewire\UmpakComponent;
 use Livewire\Attributes\{Layout};
-use Bale\Emperan\Models\Post;
 
 #[Layout('bale-dindik::layouts.app')]
-class Show extends Component
+class Show extends UmpakComponent
 {
-    public $post;
+    public string $slug;
 
-    public function mount(string $post)
+    public function mount(string $slug): void
     {
-        $this->post = Post::whereSlug($post)
-            ->wherePublished(true)
-            ->first();
-
-        if (!$this->post) {
-            abort(404, 'Berita tidak ditemukan');
-        }
+        $this->slug = $slug;
     }
 
     public function render()
     {
+        $post = $this->post($this->slug);
+
+        if (!$post) {
+            abort(404, 'Berita tidak ditemukan');
+        }
+
         return view('bale-dindik::livewire.landing-page.post.show', [
-            'post' => $this->post
+            'post' => $post,
         ])->layout('bale-dindik::layouts.app', [
-            'title' => $this->post->title,
-            'seoModel' => $this->post,
+            'title' => $post->title,
+            'seoModel' => $post,
         ]);
     }
 }

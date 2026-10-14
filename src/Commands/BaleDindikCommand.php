@@ -1,6 +1,6 @@
 <?php
 
-namespace Paparee\BaleDindik\Commands;
+namespace Bale\BaleDindik\Commands;
 
 use Illuminate\Console\Command;
 

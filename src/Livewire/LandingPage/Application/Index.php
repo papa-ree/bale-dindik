@@ -1,46 +1,33 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Application;
+namespace Bale\BaleDindik\Livewire\LandingPage\Application;
 
+use Bale\Umpak\Livewire\UmpakComponent;
 use Illuminate\Support\Facades\Blade;
-use Livewire\Component;
-use Livewire\Attributes\{Computed, Layout};
-use Bale\Emperan\Models\Section;
+use Livewire\Attributes\Computed;
 
-#[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
     public string $slug = 'application-section';
-    public array $section = [];
-    public $actived;
 
-    public function mount(?string $slug = null)
+    public function mount(?string $slug = null): void
     {
         if ($slug) {
             $this->slug = $slug;
         }
-
-        $sectionModel = Section::whereSlug($this->slug)->first();
-
-        $this->section = $sectionModel?->content ?? [];
-        $this->actived = $sectionModel?->actived ?? false;
     }
 
     public function render()
     {
-        return view('bale-dindik::livewire.landing-page.application.index');
-    }
-
-    #[Computed]
-    public function meta()
-    {
-        return $this->section['meta'] ?? [];
+        return view('bale-dindik::livewire.landing-page.application.index', [
+            'section' => $this->section($this->slug),
+        ]);
     }
 
     #[Computed]
     public function availableApps()
     {
-        $items = $this->section['items'] ?? [];
+        $items = $this->section($this->slug)?->items ?? [];
 
         return collect($items)->map(function ($item) {
             if (!empty($item['icon'])) {
@@ -62,7 +49,7 @@ class Index extends Component
     {
         $categories = ['All'];
 
-        foreach ($this->section['items'] ?? [] as $item) {
+        foreach ($this->section($this->slug)?->items ?? [] as $item) {
             if (!empty($item['category']) && !in_array($item['category'], $categories)) {
                 $categories[] = $item['category'];
             }

@@ -1,39 +1,32 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Footer;
+namespace Bale\BaleDindik\Livewire\LandingPage\Footer;
 
-use Livewire\Component;
-use Livewire\Attributes\{Computed, Layout};
-use Bale\Emperan\Models\Section;
+use Bale\Umpak\Livewire\UmpakComponent;
+use Livewire\Attributes\{Computed};
 
-#[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
     public string $slug = 'footer-section';
-    public array $section = [];
-    public $actived;
 
-    public function mount(?string $slug = null)
+    public function mount(?string $slug = null): void
     {
         if ($slug) {
             $this->slug = $slug;
         }
-
-        $sectionModel = Section::whereSlug($this->slug)->first();
-
-        $this->section = $sectionModel?->content ?? [];
-        $this->actived = $sectionModel?->actived;
     }
 
     public function render()
     {
-        return view('bale-dindik::livewire.landing-page.footer.index');
+        return view('bale-dindik::livewire.landing-page.footer.index', [
+            'section' => $this->section($this->slug),
+        ]);
     }
 
     #[Computed]
     public function meta()
     {
-        return $this->section['meta'] ?? [];
+        return $this->section($this->slug)?->meta ?? [];
     }
 
     /**
@@ -42,8 +35,7 @@ class Index extends Component
     #[Computed]
     public function about()
     {
-        $heroSection = Section::whereSlug('hero-section')->first();
-        return $heroSection?->content ?? [];
+        return $this->section('hero-section')?->meta ?? [];
     }
 
     /**
@@ -63,7 +55,7 @@ class Index extends Component
     #[Computed]
     public function parsedItems()
     {
-        $raw = $this->section['items'] ?? [];
+        $raw = $this->section($this->slug)?->items ?? [];
 
         if (empty($raw)) {
             return [];
@@ -111,7 +103,7 @@ class Index extends Component
         $result['contact'] = $contacts;
 
         // --- Social Media (using config for name & icon) ---
-        $socialConfig = config('landing-page.social-media', []);
+        $socialConfig = config('umpak.social-media', []);
         $knownKeys = ['quick link', 'contact', 'id', 'created_at', 'updated_at'];
         $socials = [];
         foreach ($item as $key => $values) {

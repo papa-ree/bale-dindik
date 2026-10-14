@@ -1,20 +1,12 @@
 <div>
-    @if($actived)
-        @if (empty($section) || empty($this->meta))
+    @if($section)
+        @if (empty($section->meta))
             {{-- Error Handler: Section Not Found --}}
-            <x-emperan::section-error title="Konten Aplikasi Tidak Ditemukan"
-                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda.">
-                <x-slot:icon>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                    </svg>
-                </x-slot:icon>
-            </x-emperan::section-error>
+            <x-umpak::section-error title="Konten Aplikasi Tidak Ditemukan"
+                message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." />
         @else
             @php
-                $meta = $this->meta;
+                $meta = $section->meta;
                 $title = $meta['title'] ?? null;
                 $subtitle = $meta['subtitle'] ?? null;
             @endphp

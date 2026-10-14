@@ -2,7 +2,7 @@
     "name": "bale/bale-dindik",
     "description": "Bale View of Dindik Company Profile",
     "keywords": [
-        "Papa Ree",
+        "bale",
         "laravel",
         "bale-dindik"
     ],
@@ -16,52 +16,20 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "illuminate/contracts": "^11.0||^12.0"
-    },
-    "require-dev": {
-        "laravel/pint": "^1.14",
-        "nunomaduro/collision": "^8.8",
-        "orchestra/testbench": "^10.0.0||^9.0.0",
-        "pestphp/pest": "^4.0",
-        "pestphp/pest-plugin-arch": "^4.0",
-        "pestphp/pest-plugin-laravel": "^4.0"
+        "php": "^8.3",
+        "bale/umpak": "*"
     },
     "autoload": {
         "psr-4": {
-            "Paparee\\BaleDindik\\": "src/",
-            "Paparee\\BaleDindik\\Database\\Factories\\": "database/factories/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Paparee\\BaleDindik\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": "@composer run prepare",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "Bale\\BaleDindik\\": "src/",
+            "Bale\\BaleDindik\\Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Paparee\\BaleDindik\\BaleDindikServiceProvider"
-            ],
-            "aliases": {
-                "BaleDindik": "Paparee\\BaleDindik\\Facades\\BaleDindik"
-            }
+                "Bale\\BaleDindik\\BaleDindikServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",

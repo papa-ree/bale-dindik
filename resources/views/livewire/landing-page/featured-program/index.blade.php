@@ -1,19 +1,11 @@
 <div>
-    @if ($actived)
-        @if (empty($section) || empty($this->meta))
+    @if ($section)
+        @if (empty($section->meta))
             {{-- Error Handler: Section Not Found --}}
-            <x-emperan::section-error title="Konten Program Unggulan Tidak Ditemukan" message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." class="py-20 bg-white dark:bg-slate-900">
-                <x-slot:icon>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary/40" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5l7 7-7 7M5 5l7 7-7 7" />
-                    </svg>
-                </x-slot:icon>
-            </x-emperan::section-error>
+            <x-umpak::section-error title="Konten Program Unggulan Tidak Ditemukan" message="Silakan konfigurasi metadata section ini di panel admin CMS Anda." class="py-20 bg-white dark:bg-slate-900" />
         @else
             @php
-                $meta = $this->meta;
+                $meta = $section->meta;
                 $title = $meta['title'] ?? 'Program Unggulan';
                 $subtitle = $meta['subtitle'] ?? null;
                 $buttons = $meta['buttons'] ?? [];

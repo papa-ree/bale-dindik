@@ -1,23 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Paparee\BaleDindik\Livewire\Index;
-use Paparee\BaleDindik\Livewire\LandingPage\Event\EventList;
-use Paparee\BaleDindik\Livewire\LandingPage\Page\Index as PageIndex;
-use Paparee\BaleDindik\Livewire\LandingPage\Post\Index as PostIndex;
-use Paparee\BaleDindik\Livewire\LandingPage\Post\PostList;
-use Paparee\BaleDindik\Livewire\LandingPage\Post\Show as PostShow;
+use Bale\BaleDindik\Livewire\Index;
+use Bale\BaleDindik\Livewire\LandingPage\Event\EventList;
+use Bale\BaleDindik\Livewire\LandingPage\Page\Index as PageIndex;
+use Bale\BaleDindik\Livewire\LandingPage\Post\PostList;
+use Bale\BaleDindik\Livewire\LandingPage\Post\Show as PostShow;
 
 Route::middleware(['web'])->group(function () {
     Route::get('/', Index::class)->name('index');
 
-    Route::name('bale.')->group(function () {
-        Route::get('page/{page}', PageIndex::class)->name('view-page');
-        Route::get('posts', PostList::class)->name('post-list');
-        Route::get('post/{post}', PostShow::class)->name('view-post');
-        Route::get('event-lists', EventList::class)->name('event-list');
+    Route::name('bale-dindik.')->group(function () {
+        Route::get('page/{slug}', PageIndex::class)->name('page.show');
+        Route::get('posts', PostList::class)->name('post.index');
+        Route::get('post/{slug}', PostShow::class)->name('post.show');
+        Route::get('event-lists', EventList::class)->name('event.index');
     });
 });

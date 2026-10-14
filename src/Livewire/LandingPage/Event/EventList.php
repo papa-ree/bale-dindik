@@ -1,80 +1,70 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire\LandingPage\Event;
+namespace Bale\BaleDindik\Livewire\LandingPage\Event;
 
-use Carbon\Carbon;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Url;
-use Livewire\Component;
-use Bale\Emperan\Models\Section;
+use Bale\Umpak\Livewire\UmpakComponent;
+use Livewire\Attributes\{Computed, Layout, Url};
 
 #[Layout('bale-dindik::layouts.app')]
-class EventList extends Component
+class EventList extends UmpakComponent
 {
     #[Url]
-    public $search = '';
+    public string $search = '';
 
     #[Url]
-    public $date = '';
-
-    #[Computed]
-    public function rawData()
-    {
-        $section = Section::whereSlug('event-announcement-section')->first();
-        return $section && isset($section->content['items']) ? collect($section->content['items']) : collect([]);
-    }
+    public string $date = '';
 
     #[Computed]
     public function events()
     {
-        $query = $this->rawData();
+        $events = $this->latestAgendas(1000);
 
-        // Filter by Search
-        if ($this->search) {
-            $query = $query->filter(function ($item) {
-                return stripos($item['name'], $this->search) !== false ||
-                    stripos($item['description'], $this->search) !== false;
+        // Filter by Search (D-9 opsi b: filter koleksi di PHP)
+        if ($this->search !== '') {
+            $needle = strtolower($this->search);
+
+            $events = $events->filter(function ($agenda) use ($needle) {
+                return str_contains(strtolower($agenda->title), $needle)
+                    || str_contains(strtolower((string) $agenda->description), $needle);
             });
         }
 
         // Filter by Date
-        if ($this->date) {
+        if ($this->date !== '') {
             if (str_contains($this->date, ' to ')) {
                 // Range date
                 [$start, $end] = explode(' to ', $this->date);
-                $query = $query->filter(function ($item) use ($start, $end) {
-                    return $item['date'] >= $start && $item['date'] <= $end;
+
+                $events = $events->filter(function ($agenda) use ($start, $end) {
+                    $date = $agenda->startDate->toDateString();
+
+                    return $date >= $start && $date <= $end;
                 });
             } else {
                 // Single date
-                $query = $query->where('date', $this->date);
+                $events = $events->filter(
+                    fn ($agenda) => $agenda->startDate->toDateString() === $this->date
+                );
             }
         }
 
         // Default sorting: Ascending by date
-        return $query->sortBy('date')->values();
+        return $events->sortBy(fn ($agenda) => $agenda->startDate)->values();
     }
 
     #[Computed]
     public function groupedEvents()
     {
         // Group by Month Year, e.g., "January 2025"
-        return $this->events()->groupBy(function ($item) {
-            return Carbon::parse($item['date'])->format('F Y');
-        });
+        return $this->events->groupBy(
+            fn ($agenda) => $agenda->startDate->translatedFormat('F Y')
+        );
     }
 
     #[Computed]
     public function upcomingEvents()
     {
-        return $this->rawData()
-            ->filter(function ($item) {
-                return $item['date'] >= now()->toDateString();
-            })
-            ->sortBy('date') // Nearest first
-            ->take(5)
-            ->values();
+        return $this->upcomingAgendas(5);
     }
 
     public function render()

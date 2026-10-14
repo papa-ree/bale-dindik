@@ -136,10 +136,10 @@
                 @forelse ($this->posts as $post)
                     <div wire:key='{{ $post->slug }}'
                         class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <a href="{{ route('bale.view-post', $post->slug) }}" class="block" wire:navigate.hover>
+                        <a href="{{ route('bale-dindik.post.show', $post->slug) }}" class="block" wire:navigate.hover>
                             <div class="relative overflow-hidden h-48">
                                 @if ($post->thumbnail)
-                                    <img src="{{ cdn_asset('thumbnails/' . $post->thumbnail) }}" alt=""
+                                    <img src="{{ $post->thumbnail }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else
                                     <div
@@ -161,7 +161,7 @@
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                         </path>
                                     </svg>
-                                    <span>{{ $post->created_at }}</span>
+                                    <span>{{ $post->formattedDate() }}</span>
                                 </div>
 
                                 <h3
@@ -170,7 +170,7 @@
                                 </h3>
 
                                 <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-4">
-                                    {{ $post->getExcerpt(100) ?? 'Belum ada konten' }}
+                                    {{ $post->excerpt ?: 'Belum ada konten' }}
                                 </p>
 
                                 <span

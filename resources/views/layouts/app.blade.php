@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <x-seo::seo-meta 
-        :model="$seoModel ?? null" 
+        :model="$seoModel ?? $post ?? $page ?? null" 
         :defaults="[
             'title' => $title ?? 'Dinas Pendidikan Kabupaten Ponorogo', 
             'image' => cdn_asset('shared/logo-png.png')
@@ -23,7 +23,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 
-    <x-emperan::balystics-tag />
+    <x-umpak::analytics />
 
 </head>
 
@@ -32,7 +32,7 @@
 <body
     class="min-h-screen bg-gray-100 dark:bg-slate-900 scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100/50 scrollbar-thumb-rounded-full scrollbar-track-rounded-full overscroll-none">
 
-    <livewire:bale-dindik.shared-components.topbar />
+    <x-bale-dindik::navbar />
 
     <main>
         {{ $slot }}

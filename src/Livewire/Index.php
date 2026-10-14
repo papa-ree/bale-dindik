@@ -1,12 +1,12 @@
 <?php
 
-namespace Paparee\BaleDindik\Livewire;
+namespace Bale\BaleDindik\Livewire;
 
-use Livewire\Component;
+use Bale\Umpak\Livewire\UmpakComponent;
 use Livewire\Attributes\{Layout};
 
 #[Layout('bale-dindik::layouts.app')]
-class Index extends Component
+class Index extends UmpakComponent
 {
     public function render()
     {
