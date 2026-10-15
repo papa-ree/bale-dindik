@@ -29,7 +29,8 @@ class EventList extends UmpakComponent
             });
         }
 
-        // Filter by Date
+        // Filter by Date: menjangkau tanggal berapapun (termasuk masa lalu),
+        // urut kronologis naik.
         if ($this->date !== '') {
             if (str_contains($this->date, ' to ')) {
                 // Range date
@@ -46,10 +47,17 @@ class EventList extends UmpakComponent
                     fn ($agenda) => $agenda->startDate->toDateString() === $this->date
                 );
             }
+
+            return $events->sortBy(fn ($agenda) => $agenda->startDate)->values();
         }
 
-        // Default sorting: Ascending by date
-        return $events->sortBy(fn ($agenda) => $agenda->startDate)->values();
+        // Default: sembunyikan agenda masa lalu, mulai dari hari ini ke atas.
+        $today = now()->startOfDay();
+
+        return $events
+            ->filter(fn ($agenda) => $agenda->startDate->gte($today))
+            ->sortBy(fn ($agenda) => $agenda->startDate)
+            ->values();
     }
 
     #[Computed]

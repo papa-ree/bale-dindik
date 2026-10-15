@@ -71,13 +71,40 @@
 
                     <!-- Statistics -->
                     @if (!empty($section->items))
+                        @php
+                            // CMS item bisa berupa skalar maupun struktur EditorJS (array).
+                            // Normalisasi agar nilai array tidak memecahkan render.
+                            $itemToText = function ($value): string {
+                                if (is_string($value) || is_numeric($value)) {
+                                    return (string) $value;
+                                }
+
+                                if (is_array($value)) {
+                                    $texts = [];
+                                    array_walk_recursive($value, function ($v, $k) use (&$texts) {
+                                        if ($k === 'text' && is_string($v)) {
+                                            $texts[] = $v;
+                                        }
+                                    });
+
+                                    return trim(implode(' ', $texts));
+                                }
+
+                                return '';
+                            };
+                        @endphp
+
                         <div class="max-w-6xl mx-auto mb-20">
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                                 @foreach ($section->items as $item)
+                                    @php
+                                        $itemName = $itemToText($item['name'] ?? '');
+                                        $itemCount = (int) preg_replace('/\D+/', '', $itemToText($item['count'] ?? ''));
+                                    @endphp
                                     <div
                                         class="bg-white dark:bg-slate-800 rounded-lg p-8 text-center border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                                         <div class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-2 odometer" x-data="{
-                                                                                endVal: {{ (int) ($item['count'] ?? 0) }},
+                                                                                endVal: {{ $itemCount }},
                                                                                 initOdometer() {
                                                                                     setTimeout(() => {
                                                                                         this.$el.innerHTML = this.endVal;
@@ -87,7 +114,7 @@
                                             0
                                         </div>
                                         <div class="text-gray-600 dark:text-slate-400 font-medium capitalize">
-                                            {{ $item['name'] ?? '' }}
+                                            {{ $itemName }}
                                         </div>
                                     </div>
                                 @endforeach
