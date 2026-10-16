@@ -1,6 +1,9 @@
 <header
     class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm select-none transition-colors duration-300"
     x-data="{ mobileMenuOpen: false }" @click.away="mobileMenuOpen = false">
+
+    <x-gupa::honeypot fieldName="website_url" action="{{ route('index') }}" />
+
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             {{-- Logo --}}
@@ -38,8 +41,7 @@
                                 <x-umpak::icon name="chevron-down" class="w-3.5 h-3.5" />
                             </button>
 
-                            <div x-show="isDropdownOpen({{ $i }})" x-cloak
-                                x-transition:enter="transition ease-out duration-200"
+                            <div x-show="isDropdownOpen({{ $i }})" x-cloak x-transition:enter="transition ease-out duration-200"
                                 x-transition:enter-start="opacity-0 translate-y-2"
                                 x-transition:enter-end="opacity-100 translate-y-0"
                                 class="absolute left-1/2 -translate-x-1/2 mt-3 w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700/50 py-2 z-50">
