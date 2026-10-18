@@ -138,7 +138,7 @@
                         class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <a href="{{ route('bale-dindik.post.show', $post->slug) }}" class="block" wire:navigate.hover>
                             <div class="relative overflow-hidden h-48">
-                                @if ($post->thumbnail)
+                                @if ($post->hasThumbnail())
                                     <img src="{{ $post->thumbnail }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else

@@ -12,7 +12,7 @@
                     {{-- Left Column: Post detail --}}
                     <div class="lg:col-span-8">
                         {{-- Featured Image --}}
-                        @if ($post->thumbnail)
+                        @if ($post->hasThumbnail())
                             <div class="mb-10 rounded-2xl overflow-hidden shadow-2xl">
                                 <img src="{{ $post->thumbnail }}"
                                     alt="{{ $post->title }}" class="w-full h-auto object-cover max-h-[500px]" />
