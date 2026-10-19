@@ -9,6 +9,15 @@
                 $meta = $section->meta;
                 $title = $meta['title'] ?? null;
                 $subtitle = $meta['subtitle'] ?? null;
+
+                // Tailwind tidak men-generate kelas hasil interpolasi, jadi jumlah kolom
+                // dari CMS (meta.custom.columns) dipetakan ke kelas grid statis.
+                $gridColumns = match ((int) ($meta['custom']['columns'] ?? 3)) {
+                    1 => 'grid-cols-1',
+                    2 => 'grid-cols-1 sm:grid-cols-2',
+                    4 => 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+                    default => 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+                };
             @endphp
             <section id="applications" class="py-20 bg-neutral dark:bg-slate-900" x-data="appSection({
                                 apps: @js($this->availableApps),
@@ -58,11 +67,11 @@
                     </div>
 
                     <!-- Applications Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="grid {{ $gridColumns }} gap-6 max-w-6xl mx-auto">
 
                         <!-- Jika tidak ada aplikasi -->
                         <div x-show="filteredApplications.length === 0"
-                            class="bg-white dark:bg-slate-800 col-span-3 rounded-lg p-8 border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+                            class="bg-white dark:bg-slate-800 col-span-full rounded-lg p-8 border border-gray-200 dark:border-slate-700 text-center shadow-sm">
                             <div class="flex flex-col items-center mx-auto w-full gap-4">
 
                                 <!-- Icon (search slash / not found) -->

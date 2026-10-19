@@ -72,9 +72,14 @@
                     <!-- Statistics -->
                     @if (!empty($section->items))
                         @php
-                            // CMS item bisa berupa skalar maupun struktur EditorJS (array).
-                            // Normalisasi agar nilai array tidak memecahkan render.
+                            // Nilai item dari CMS datang terbungkus array satu elemen
+                            // (name: ["murid"], count: ["80000"]) atau berupa struktur
+                            // EditorJS. Normalisasi agar label & angka statistik tetap tampil.
                             $itemToText = function ($value): string {
+                                while (is_array($value) && count($value) === 1 && is_scalar(reset($value))) {
+                                    $value = reset($value);
+                                }
+
                                 if (is_string($value) || is_numeric($value)) {
                                     return (string) $value;
                                 }
@@ -86,6 +91,15 @@
                                             $texts[] = $v;
                                         }
                                     });
+
+                                    // Bukan struktur EditorJS: pakai nilai skalar apa adanya.
+                                    if ($texts === []) {
+                                        array_walk_recursive($value, function ($v) use (&$texts) {
+                                            if (is_scalar($v)) {
+                                                $texts[] = (string) $v;
+                                            }
+                                        });
+                                    }
 
                                     return trim(implode(' ', $texts));
                                 }
