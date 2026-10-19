@@ -31,17 +31,20 @@
                     </div>
         
                     {{-- Posts Grid --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto mb-10">
                         @foreach ($this->availablePosts as $post)
+                            {{-- Card: kompak horizontal di mobile, vertikal di desktop --}}
                             <a href="{{ route('bale-dindik.post.show', $post->slug) }}" wire:key='{{ $post->slug }}' wire:navigate.hover
-                                class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group block">
-                                <div class="relative overflow-hidden h-48">
+                                class="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group sm:block sm:p-0">
+                                {{-- Thumbnail --}}
+                                <div
+                                    class="relative shrink-0 w-20 h-20 rounded-lg overflow-hidden sm:w-full sm:h-48 sm:rounded-none">
                                     @if ($post->hasThumbnail())
                                         <img src="{{ $post->thumbnail }}" alt=""
                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
                                     @else
                                         <div class="w-full h-full group-hover:scale-150 transition-transform duration-500 bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
-                                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                                 </path>
@@ -50,9 +53,11 @@
                                     @endif
                                 </div>
         
-                                <div class="p-6">
-                                    <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-3">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {{-- Body: urutan mobile = judul, excerpt, tanggal --}}
+                                <div class="flex grow flex-col min-w-0 sm:block sm:p-6">
+                                    <div
+                                        class="order-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-slate-400 mt-1.5 sm:mt-0 sm:mb-3 sm:text-sm">
+                                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                             </path>
@@ -61,18 +66,19 @@
                                     </div>
         
                                     <h3
-                                        class="font-bold text-primary dark:text-white mb-3 text-lg line-clamp-2 group-hover:text-secondary transition-colors duration-300">
+                                        class="order-1 font-bold text-primary dark:text-white text-sm leading-snug mb-1 sm:text-lg sm:mb-3 sm:leading-normal line-clamp-2 group-hover:text-secondary transition-colors duration-300">
                                         {{ $post->title }}
                                     </h3>
         
                                     @if ($showExcerpt)
-                                        <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-4">
+                                        <p
+                                            class="order-2 text-gray-600 dark:text-slate-400 text-xs line-clamp-2 sm:text-sm sm:line-clamp-3 mb-0 sm:mb-4">
                                             {{ $post->excerpt }}
                                         </p>
                                     @endif
         
                                     <span
-                                        class="text-primary dark:text-white text-sm font-semibold inline-flex items-center group-hover:text-secondary transition-colors duration-300">
+                                        class="hidden sm:inline-flex text-primary dark:text-white text-sm font-semibold items-center group-hover:text-secondary transition-colors duration-300">
                                         Read more
                                         <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,6 +87,13 @@
                                         </svg>
                                     </span>
                                 </div>
+
+                                {{-- Chevron (mobile) --}}
+                                <svg class="shrink-0 w-5 h-5 text-gray-300 dark:text-slate-600 sm:hidden" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                    </path>
+                                </svg>
                             </a>
                         @endforeach
                     </div>

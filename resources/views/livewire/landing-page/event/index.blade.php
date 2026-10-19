@@ -27,26 +27,29 @@
                         @endif
                     </div>
 
-                    <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="max-w-4xl mx-auto space-y-4 sm:space-y-6">
                         <template x-for="event in eventsData">
+                            {{-- Card: kompak horizontal di mobile, lebih lega di desktop --}}
                             <div
-                                class="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-300 group">
-                                <div class="flex gap-6">
+                                class="bg-white dark:bg-slate-800 rounded-lg p-3 sm:p-6 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-300 group">
+                                <div class="flex items-center gap-3 sm:items-start sm:gap-6">
                                     <div class="shrink-0">
                                         <div
-                                            class="w-20 h-20 bg-primary text-white rounded-lg flex flex-col items-center justify-center group-hover:bg-secondary group-hover:text-primary transition-all duration-300">
-                                            <span class="text-2xl font-bold"
+                                            class="w-14 h-14 sm:w-20 sm:h-20 bg-primary text-white rounded-lg flex flex-col items-center justify-center group-hover:bg-secondary group-hover:text-primary transition-all duration-300">
+                                            <span class="text-xl sm:text-2xl font-bold"
                                                 x-text="new Date(event.date + 'T00:00:00').getDate()"></span>
                                             <span class="text-xs uppercase font-semibold"
                                                 x-text="new Date(event.date + 'T00:00:00').toLocaleDateString('id-ID', { month: 'short' })"></span>
                                         </div>
                                     </div>
-                                    <div class="flex-1">
-                                        <h3 class="text-xl font-bold text-primary dark:text-white mb-2 group-hover:text-secondary transition-colors duration-300"
+                                    <div class="grow min-w-0">
+                                        <h3 class="text-base sm:text-xl font-bold text-primary dark:text-white mb-1 sm:mb-2 line-clamp-2 sm:line-clamp-none group-hover:text-secondary transition-colors duration-300"
                                             x-text="event.title"></h3>
-                                        <p class="text-gray-600 dark:text-slate-400 mb-3" x-text="event.description"></p>
-                                        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <p class="hidden sm:block text-gray-600 dark:text-slate-400 mb-0 sm:mb-3"
+                                            x-text="event.description"></p>
+                                        <div
+                                            class="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1.5 sm:mt-0">
+                                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                                 </path>
