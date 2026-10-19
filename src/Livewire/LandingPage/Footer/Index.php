@@ -3,6 +3,7 @@
 namespace Bale\BaleDindik\Livewire\LandingPage\Footer;
 
 use Bale\Umpak\Livewire\UmpakComponent;
+use Illuminate\Support\Facades\Blade;
 use Livewire\Attributes\{Computed};
 
 class Index extends UmpakComponent
@@ -129,17 +130,21 @@ class Index extends UmpakComponent
                     'label' => $label !== '' ? $label : $url,
                     'url' => $url !== '' ? $url : '#',
                     'icon' => $this->text($item['icon'] ?? ''),
+                    'icon_svg' => $this->linkIcon($this->text($item['icon'] ?? '')),
                 ];
 
                 continue;
             }
 
             if (in_array($group, ['kontak', 'contact'], true)) {
+                $type = $this->contactType($this->text($item['nama'] ?? ''));
+
                 $contacts[] = [
-                    'type' => $this->contactType($this->text($item['nama'] ?? '')),
+                    'type' => $type,
                     'value' => $this->text($item['value'] ?? ''),
                     'url' => $this->text($item['url'] ?? ''),
                     'icon' => $this->text($item['icon'] ?? ''),
+                    'icon_svg' => $this->contactIcon($this->text($item['icon'] ?? ''), $type),
                 ];
 
                 continue;
@@ -184,7 +189,11 @@ class Index extends UmpakComponent
                 $tempLabels[str_replace('_link', '', $key)] = $value;
             } elseif (str_ends_with($key, '_url')) {
                 $name = str_replace('_url', '', $key);
-                $quickLinks[] = ['label' => $tempLabels[$name] ?? $name, 'url' => $value];
+                $quickLinks[] = [
+                    'label' => $tempLabels[$name] ?? $name,
+                    'url' => $value,
+                    'icon_svg' => $this->linkIcon(''),
+                ];
             }
         }
 
@@ -193,14 +202,15 @@ class Index extends UmpakComponent
         foreach ((array) ($item['contact'] ?? []) as $entry) {
             if (!is_string($entry) || !str_contains($entry, ':')) {
                 if (is_string($entry) && $entry !== '') {
-                    $contacts[] = ['type' => 'info', 'value' => $entry];
+                    $contacts[] = ['type' => 'info', 'value' => $entry, 'icon_svg' => $this->contactIcon('', 'info')];
                 }
 
                 continue;
             }
 
             [$type, $value] = explode(':', $entry, 2);
-            $contacts[] = ['type' => $this->contactType($type), 'value' => trim($value)];
+            $type = $this->contactType($type);
+            $contacts[] = ['type' => $type, 'value' => trim($value), 'icon_svg' => $this->contactIcon('', $type)];
         }
 
         // --- Social Media --- (key di luar daftar field item = platform)
@@ -256,6 +266,54 @@ class Index extends UmpakComponent
         $key = strtolower(trim($key));
 
         return str_starts_with($key, 'sm_') ? substr($key, 3) : $key;
+    }
+
+    /**
+     * Icon tautan: pakai nama icon dari CMS, fallback chevron bila nama itu
+     * tidak tersedia di set icon yang terpasang.
+     */
+    private function linkIcon(string $name): ?string
+    {
+        return $this->renderIcon($name, 'w-4 h-4') ?? $this->renderIcon('chevron-right', 'w-4 h-4');
+    }
+
+    /**
+     * Icon kontak: pakai nama icon dari CMS, fallback berdasarkan tipe kontak.
+     */
+    private function contactIcon(string $name, string $type): ?string
+    {
+        return $this->renderIcon($name, 'w-4 h-4') ?? $this->renderIcon($this->defaultContactIcon($type), 'w-4 h-4');
+    }
+
+    private function defaultContactIcon(string $type): string
+    {
+        return match ($type) {
+            'email' => 'mail',
+            'phone' => 'phone',
+            'address' => 'map-pin',
+            default => 'info',
+        };
+    }
+
+    /**
+     * Render icon lucide menjadi SVG.
+     *
+     * Nama icon dari CMS divalidasi ke huruf/angka/tanda hubung saja supaya
+     * tidak bisa menyuntikkan markup lewat Blade::render().
+     */
+    private function renderIcon(string $name, string $class): ?string
+    {
+        $name = strtolower(trim($name));
+
+        if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $name)) {
+            return null;
+        }
+
+        try {
+            return Blade::render('<x-lucide-' . $name . ' class="' . $class . '" />');
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**
