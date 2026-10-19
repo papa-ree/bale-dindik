@@ -1,8 +1,8 @@
 <div class="min-h-screen bg-gray-50 dark:bg-slate-900">
     <x-bale-dindik::header-page title="Agenda & Kegiatan" :breadcrumbs="[['label' => 'Agenda']]" />
     
-    {{-- Mobile/Tablet Sticky Filter --}}
-    <section class="lg:hidden sticky top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
+    {{-- Mobile/Tablet Filter (tidak sticky) --}}
+    <section class="lg:hidden z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
                 <div class="space-y-4">
@@ -64,17 +64,17 @@
                 {{-- Loading Skeleton --}}
                 <div wire:loading class="space-y-12 w-full">
                     <div class="relative">
-                        <div class="sticky top-85 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
+                        <div class="sticky top-20 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
                             <div class="h-8 w-48 bg-gray-200 dark:bg-slate-700 rounded animate-pulse"></div>
                         </div>
-                        <div class="grid gap-6">
+                        <div class="grid gap-4 sm:gap-6">
                             @foreach(range(1, 3) as $i)
-                                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700">
-                                    <div class="flex flex-col sm:flex-row gap-6 animate-pulse">
-                                        <div class="shrink-0 w-24 h-24 bg-gray-200 dark:bg-slate-700 rounded-xl"></div>
-                                        <div class="grow space-y-4">
-                                            <div class="h-6 bg-gray-200 dark:bg-slate-700 rounded w-3/4"></div>
-                                            <div class="space-y-2">
+                                <div class="bg-white dark:bg-slate-800 rounded-2xl p-3 sm:p-6 border border-gray-100 dark:border-slate-700">
+                                    <div class="flex items-center gap-3 sm:items-start sm:gap-6 animate-pulse">
+                                        <div class="shrink-0 w-14 h-14 sm:w-24 sm:h-24 bg-gray-200 dark:bg-slate-700 rounded-xl"></div>
+                                        <div class="grow min-w-0 space-y-2 sm:space-y-4">
+                                            <div class="h-5 sm:h-6 bg-gray-200 dark:bg-slate-700 rounded w-3/4"></div>
+                                            <div class="hidden sm:block space-y-2">
                                                 <div class="h-4 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
                                                 <div class="h-4 bg-gray-200 dark:bg-slate-700 rounded w-2/3"></div>
                                             </div>
@@ -89,39 +89,39 @@
                 <div wire:loading.remove>
                     @forelse ($this->groupedEvents as $monthYear => $events)
                         <div class="relative">
-                            {{-- mount year --}}
-                            <div class="sticky top-85 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
+                            {{-- month --}}
+                            <div class="sticky top-20 lg:top-24 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm py-4 mb-6 border-b border-gray-200 dark:border-slate-800">
                                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                                     <span class="w-1.5 h-8 bg-primary rounded-full"></span>
                                     {{ $monthYear }}
                                 </h2>
                             </div>
 
-                            <div class="grid gap-6">
+                            <div class="grid gap-4 sm:gap-6">
                                 @foreach ($events as $event)
-                                    <div class="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300">
-                                        <div class="flex flex-col sm:flex-row gap-6">
+                                    <div class="group bg-white dark:bg-slate-800 rounded-2xl p-3 sm:p-6 border border-gray-100 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300">
+                                        <div class="flex items-center gap-3 sm:items-start sm:gap-6">
                                             {{-- Date Badge --}}
-                                            <div class="shrink-0 flex flex-row sm:flex-col items-center justify-center sm:w-24 bg-primary/5 dark:bg-primary/10 rounded-xl p-4 sm:p-2 text-center border border-primary/10">
-                                                <span class="text-3xl font-bold text-primary block leading-none">
+                                            <div class="shrink-0 flex flex-col items-center justify-center w-14 sm:w-24 bg-primary/5 dark:bg-primary/10 rounded-xl py-2 sm:p-2 text-center border border-primary/10">
+                                                <span class="text-2xl sm:text-3xl font-bold text-primary block leading-none">
                                                     {{ $event->startDate->format('d') }}
                                                 </span>
-                                                <span class="text-sm font-medium text-primary/80 uppercase tracking-wider mt-0 sm:mt-1 ml-2 sm:ml-0">
+                                                <span class="text-xs sm:text-sm font-medium text-primary/80 uppercase tracking-wider mt-1">
                                                     {{ $event->startDate->format('M') }}
                                                 </span>
                                             </div>
 
-                                            {{-- Content --}}
-                                            <div class="grow">
-                                                <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
+                                            {{-- Content: mobile = judul + tombol share sebaris --}}
+                                            <div class="grow min-w-0 flex items-center gap-2 sm:block">
+                                                <h3 class="grow min-w-0 text-base sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-0 sm:mb-2 line-clamp-2 sm:line-clamp-none">
                                                     {{ $event->title }}
                                                 </h3>
-                                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                                                <p class="hidden sm:block text-gray-600 dark:text-gray-400 leading-relaxed mb-0 sm:mb-4">
                                                     {!! nl2br(e($event->description)) !!}
                                                 </p>
 
                                                 {{-- Share Button --}}
-                                                <div x-data="{
+                                                <div class="shrink-0" x-data="{
                                                     copied: false,
                                                     share() {
                                                         const title = @js($event->title);
@@ -140,8 +140,8 @@
                                                         }
                                                     }
                                                 }">
-                                                    <button @click="share" 
-                                                        class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-slate-700/50 hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary rounded-lg transition-all duration-300 group/btn">
+                                                    <button @click="share" title="Bagikan agenda" aria-label="Bagikan agenda"
+                                                        class="inline-flex items-center gap-2 p-2 sm:px-4 sm:py-2 bg-gray-50 dark:bg-slate-700/50 hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary rounded-lg transition-all duration-300 group/btn">
                                                         <div class="relative">
                                                             <svg x-show="!copied" class="w-4 h-4 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
@@ -150,7 +150,7 @@
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                             </svg>
                                                         </div>
-                                                        <span x-text="copied ? 'Tersalin!' : 'Bagikan'" class="text-sm font-medium"></span>
+                                                        <span x-text="copied ? 'Tersalin!' : 'Bagikan'" class="hidden sm:inline text-sm font-medium"></span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
             {{-- Sidebar --}}
             <div class="lg:col-span-4 space-y-8">
                 {{-- Filters --}}
-                <div class="hidden lg:block bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm sticky top-28">
+                <div class="hidden lg:block bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6">Filter Agenda</h3>
                     
                     <div class="space-y-4">

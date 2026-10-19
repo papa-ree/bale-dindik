@@ -37,6 +37,8 @@
     </main>
 
     <livewire:bale-dindik.landing-page.footer.index slug="footer-section" />
+    <livewire:umpak.shared-components.floating-contact borderColor="teal-500" />
+
     @livewireScripts
 
 </body>

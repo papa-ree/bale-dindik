@@ -4,9 +4,9 @@
     <x-bale-dindik::header-page title="Semua Berita" :breadcrumbs="[['label' => 'Semua Berita']]"
         subtitle="Dapatkan informasi terbaru seputar kegiatan dan perkembangan Dinas Pendidikan Kabupaten Ponorogo." />
 
-    {{-- Search Form Sticky --}}
+    {{-- Search Form (sticky hanya pada desktop) --}}
     <section
-        class="sticky top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
+        class="lg:sticky lg:top-20 z-20 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
                 <div
@@ -91,40 +91,45 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Skeleton Loading --}}
             <div wire:loading class="w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto mb-16">
                     @foreach(range(1, 3) as $i)
                         <div
                             class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 animate-pulse">
-                            <div class="block">
+                            <div class="flex items-center gap-3 p-3 sm:block sm:p-0">
                                 {{-- Image Placeholder --}}
-                                <div class="relative overflow-hidden h-48 bg-gray-200 dark:bg-slate-700"></div>
+                                <div
+                                    class="shrink-0 w-20 h-20 rounded-lg bg-gray-200 dark:bg-slate-700 sm:w-full sm:h-48 sm:rounded-none">
+                                </div>
 
-                                <div class="p-6">
+                                <div class="flex grow flex-col min-w-0 sm:block sm:p-6">
                                     {{-- Date Meta --}}
-                                    <div class="flex items-center gap-2 mb-3">
-                                        <div class="w-4 h-4 bg-gray-200 dark:bg-slate-700 rounded-full"></div>
-                                        <div class="h-4 w-24 bg-gray-200 dark:bg-slate-700 rounded"></div>
+                                    <div class="order-3 flex items-center gap-2 mt-1.5 sm:mt-0 sm:mb-3">
+                                        <div class="hidden sm:block w-4 h-4 bg-gray-200 dark:bg-slate-700 rounded-full">
+                                        </div>
+                                        <div class="h-3 w-20 sm:h-4 sm:w-24 bg-gray-200 dark:bg-slate-700 rounded"></div>
                                     </div>
 
                                     {{-- Title --}}
-                                    <div class="mb-3 space-y-2">
-                                        <div class="h-5 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
-                                        <div class="h-5 bg-gray-200 dark:bg-slate-700 rounded w-3/4"></div>
+                                    <div class="order-1 mb-1 space-y-2 sm:mb-3">
+                                        <div class="h-4 sm:h-5 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
+                                        <div class="h-4 sm:h-5 bg-gray-200 dark:bg-slate-700 rounded w-3/4"></div>
                                     </div>
 
                                     {{-- Excerpt --}}
-                                    <div class="mb-4 space-y-2">
-                                        <div class="h-4 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
-                                        <div class="h-4 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
-                                        <div class="h-4 bg-gray-200 dark:bg-slate-700 rounded w-2/3"></div>
+                                    <div class="order-2 mb-0 space-y-2 sm:mb-4">
+                                        <div class="h-3 sm:h-4 bg-gray-200 dark:bg-slate-700 rounded w-full"></div>
+                                        <div class="h-3 sm:h-4 bg-gray-200 dark:bg-slate-700 rounded w-2/3"></div>
                                     </div>
 
                                     {{-- Read More --}}
-                                    <div class="flex items-center gap-1">
+                                    <div class="hidden sm:flex items-center gap-1">
                                         <div class="h-4 w-20 bg-gray-200 dark:bg-slate-700 rounded"></div>
                                         <div class="w-4 h-4 bg-gray-200 dark:bg-slate-700 rounded"></div>
                                     </div>
                                 </div>
+
+                                {{-- Chevron (mobile) --}}
+                                <div class="shrink-0 w-5 h-5 bg-gray-200 dark:bg-slate-700 rounded sm:hidden"></div>
                             </div>
                         </div>
                     @endforeach
@@ -132,20 +137,24 @@
             </div>
 
             <div wire:loading.remove
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto mb-16">
                 @forelse ($this->posts as $post)
                     <div wire:key='{{ $post->slug }}'
                         class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <a href="{{ route('bale-dindik.post.show', $post->slug) }}" class="block" wire:navigate.hover>
-                            <div class="relative overflow-hidden h-48">
+                        {{-- Card: kompak horizontal di mobile, vertikal di desktop --}}
+                        <a href="{{ route('bale-dindik.post.show', $post->slug) }}"
+                            class="flex items-center gap-3 p-3 sm:block sm:p-0" wire:navigate.hover>
+                            {{-- Thumbnail --}}
+                            <div
+                                class="relative shrink-0 w-20 h-20 rounded-lg overflow-hidden sm:w-full sm:h-48 sm:rounded-none">
                                 @if ($post->hasThumbnail())
                                     <img src="{{ $post->thumbnail }}" alt=""
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 @else
                                     <div
                                         class="w-full h-full group-hover:scale-150 transition-transform duration-500 bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                             </path>
@@ -154,9 +163,11 @@
                                 @endif
                             </div>
 
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-3">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {{-- Body: urutan mobile = judul, excerpt, tanggal --}}
+                            <div class="flex grow flex-col min-w-0 sm:block sm:p-6">
+                                <div
+                                    class="order-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-slate-400 mt-1.5 sm:mt-0 sm:mb-3 sm:text-sm">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                         </path>
@@ -165,16 +176,17 @@
                                 </div>
 
                                 <h3
-                                    class="font-bold text-primary dark:text-white mb-3 text-lg line-clamp-2 group-hover:text-secondary transition-colors duration-300">
+                                    class="order-1 font-bold text-primary dark:text-white text-sm leading-snug mb-1 sm:text-lg sm:mb-3 sm:leading-normal line-clamp-2 group-hover:text-secondary transition-colors duration-300">
                                     {{ $post->title }}
                                 </h3>
 
-                                <p class="text-gray-600 dark:text-slate-400 text-sm line-clamp-3 mb-4">
+                                <p
+                                    class="order-2 text-gray-600 dark:text-slate-400 text-xs line-clamp-2 sm:text-sm sm:line-clamp-3 mb-0 sm:mb-4">
                                     {{ $post->excerpt ?: 'Belum ada konten' }}
                                 </p>
 
                                 <span
-                                    class="text-primary dark:text-white text-sm font-semibold inline-flex items-center group-hover:text-secondary transition-colors duration-300">
+                                    class="hidden sm:inline-flex text-primary dark:text-white text-sm font-semibold items-center group-hover:text-secondary transition-colors duration-300">
                                     Read more
                                     <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,6 +196,13 @@
                                     </svg>
                                 </span>
                             </div>
+
+                            {{-- Chevron (mobile) --}}
+                            <svg class="shrink-0 w-5 h-5 text-gray-300 dark:text-slate-600 sm:hidden" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
                         </a>
                     </div>
                 @empty
